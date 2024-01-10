@@ -9,7 +9,6 @@ import java.util.Objects;
 
 public class AppException extends RuntimeException {
     private String functionName;
-
     private String className;
     private HttpStatus status;
     private LocalDateTime timeStamp;

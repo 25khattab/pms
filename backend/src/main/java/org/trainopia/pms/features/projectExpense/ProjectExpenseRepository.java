@@ -1,4 +1,4 @@
-package org.trainopia.pms.features.project.projectExpense;
+package org.trainopia.pms.features.projectExpense;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

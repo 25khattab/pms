@@ -7,29 +7,32 @@ import java.util.Collections;
 import java.util.List;
 
 public class ApiError {
-    private HttpStatus status;
+    private String message;
+    private int status;
     private LocalDateTime timeStamp;
-    private List<CommonError> errors;
+    private List<Object> errors;
 
-    public ApiError(String message, CommonError error, HttpStatus status) {
 
+    public ApiError(String message, CommonError error, int status) {
+        this.message=message;
         this.status = status;
         this.timeStamp = LocalDateTime.now();
         this.errors = Collections.singletonList(error);
 
     }
 
-    public ApiError(String message, List<CommonError> errors, HttpStatus status) {
+    public ApiError(String message, List<Object> errors, int status) {
+        this.message=message;
         this.status = status;
         this.timeStamp = LocalDateTime.now();
         this.errors = errors;
     }
 
-    public HttpStatus getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(HttpStatus status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -41,12 +44,19 @@ public class ApiError {
         this.timeStamp = timeStamp;
     }
 
-    public List<CommonError> getErrors() {
+    public List<Object> getErrors() {
         return errors;
     }
 
-    public void setErrors(List<CommonError> errors) {
+    public void setErrors(List<Object> errors) {
         this.errors = errors;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

@@ -1,5 +1,4 @@
-package org.trainopia.pms.features.project.projectDetails;
-
+package org.trainopia.pms.utility;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -7,19 +6,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "project_details")
-public class ProjectDetails {
-
+@MappedSuperclass
+public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
-    @Column(name = "description")
-    private String description;
-
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
@@ -29,30 +22,12 @@ public class ProjectDetails {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-
-    public ProjectDetails() {
-
-    }
-
-    public ProjectDetails(String description) {
-        this.description = description;
-
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -69,15 +44,5 @@ public class ProjectDetails {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Project{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
     }
 }

@@ -1,15 +1,19 @@
-package org.trainopia.pms.features.team;
+package org.trainopia.pms.features.projectExpense;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.trainopia.pms.features.volunteer.Volunteer;
+import org.trainopia.pms.features.project.Project;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "team")
-public class Team {
+@Table(name = "project_expense")
+public class ProjectExpense {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -18,13 +22,8 @@ public class Team {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "team_leader_volunteer_id")
-    private Volunteer teamLeader;
-
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "team_co_leader_volunteer_id")
-    private Volunteer teamCoLeader;
+    @Column(name = "price")
+    private int price;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
@@ -34,11 +33,19 @@ public class Team {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public Team() {
+    @ManyToOne(fetch = FetchType.EAGER,
+            cascade = {CascadeType.REMOVE})
+    @JoinColumn(name = "project_id")
+    @JsonIgnore
+    private Project project;
+
+    public ProjectExpense() {
+
     }
 
-    public Team(String name) {
+    public ProjectExpense(String name, int price) {
         this.name = name;
+        this.price = price;
     }
 
     public int getId() {
@@ -57,20 +64,20 @@ public class Team {
         this.name = name;
     }
 
-    public Volunteer getTeamLeader() {
-        return teamLeader;
+    public int getPrice() {
+        return price;
     }
 
-    public void setTeamLeader(Volunteer teamLeader) {
-        this.teamLeader = teamLeader;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
-    public Volunteer getTeamCoLeader() {
-        return teamCoLeader;
+    public Project getProject() {
+        return project;
     }
 
-    public void setTeamCoLeader(Volunteer teamCoLeader) {
-        this.teamCoLeader = teamCoLeader;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -91,11 +98,10 @@ public class Team {
 
     @Override
     public String toString() {
-        return "Team{" +
+        return "ProjectExpense{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", teamLeader=" + teamLeader +
-                ", teamCoLeader=" + teamCoLeader +
+                ", price=" + price +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

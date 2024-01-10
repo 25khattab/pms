@@ -1,61 +1,44 @@
 package org.trainopia.pms.features.project;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.trainopia.pms.features.project.projectExpense.ProjectExpense;
-import org.trainopia.pms.features.project.projectDetails.ProjectDetails;
+import org.trainopia.pms.features.projectDetails.ProjectDetails;
+import org.trainopia.pms.features.projectExpense.ProjectExpense;
+import org.trainopia.pms.utility.BaseEntity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "project")
-public class Project {
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+public class Project extends BaseEntity {
 
     @Column(name = "title")
+
     private String title;
 
     @Column(name = "min_age")
     private int minAge;
 
     @Column(name = "max_age")
+
     private int maxAge;
 
     @Column(name = "price")
+
     private double price;
 
     @Column(name = "location")
+
     private String location;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_details_id")
     private ProjectDetails projectDetails;
 
-
     @OneToMany(mappedBy = "project",
-            fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JsonIgnore
+        fetch = FetchType.LAZY,
+        cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
     private List<ProjectExpense> projectExpenses;
-
-    @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 
     public Project() {
 
@@ -67,14 +50,6 @@ public class Project {
         this.maxAge = maxAge;
         this.price = price;
         this.location = location;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -129,8 +104,8 @@ public class Project {
         return projectExpenses;
     }
 
-    public void setProjectExpenses(List<ProjectExpense> projectExpense) {
-        this.projectExpenses = projectExpense;
+    public void setProjectExpenses(List<ProjectExpense> projectExpenses) {
+        this.projectExpenses = projectExpenses;
     }
 
     public void addProjectExpense(ProjectExpense tempProjectExpense) {
@@ -141,35 +116,19 @@ public class Project {
         tempProjectExpense.setProject(this);
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     @Override
     public String toString() {
         return "Project{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", minAge=" + minAge +
-                ", maxAge=" + maxAge +
-                ", price=" + price +
-                ", location='" + location + '\'' +
-                ", projectDetails=" + projectDetails +
-                ", projectExpenses=" + projectExpenses +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+            "id=" + getId() +
+            ", title='" + title + '\'' +
+            ", minAge=" + minAge +
+            ", maxAge=" + maxAge +
+            ", price=" + price +
+            ", location='" + location + '\'' +
+            ", projectDetails=" + projectDetails +
+            ", projectExpenses=" + projectExpenses +
+            ", createdAt=" + getCreatedAt() +
+            ", updatedAt=" + getUpdatedAt() +
+            '}';
     }
 }
