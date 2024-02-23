@@ -14,6 +14,7 @@ import org.trainopia.pms.features.project.dto.ProjectDTO;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class ProjectDAOImpl implements ProjectDAO {
@@ -29,18 +30,25 @@ public class ProjectDAOImpl implements ProjectDAO {
     public Page<ProjectDTO> findAll(Pageable pageable) {
         String countQuery = "SELECT COUNT(u) FROM Project u";
         Long total = entityManager.createQuery(countQuery, Long.class).getSingleResult();
-        List<ProjectDTO> result = entityManager.createQuery(
-            "SELECT NEW org.trainopia.pms.features.project.dto.ProjectDTO( "
-                + "p.id, p.createdAt, p.updatedAt, p.title, p.minAge, p.maxAge, p.price, p.location, p.projectDetails) "
-                + "FROM Project p",
-            ProjectDTO.class).setFirstResult((int) pageable.getOffset())
-            .setMaxResults(pageable.getPageSize()).getResultList();
-        return new PageImpl<>(result, pageable, total);
-    }
 
-    @Override
-    public List<Project> findAllWithExpenses() {
-        return null;
+        String selectQuery = "SELECT NEW org.trainopia.pms.features.project.dto.ProjectDTO( "
+            + "p.id, p.createdAt, p.updatedAt, p.title, p.minAge, p.maxAge, p.price, p.location, p.projectDetails) "
+            + "FROM Project p";
+
+        // Append sorting information
+        if (pageable.getSort().isSorted()) {
+            selectQuery += " ORDER BY ";
+            selectQuery += pageable.getSort().stream()
+                                   .map(order -> order.getProperty() + " " + (order.isAscending() ? "ASC" : "DESC"))
+                                   .collect(Collectors.joining(", "));
+        }
+
+        List<ProjectDTO> result = entityManager.createQuery(selectQuery, ProjectDTO.class)
+                                               .setFirstResult((int) pageable.getOffset())
+                                               .setMaxResults(pageable.getPageSize())
+                                               .getResultList();
+
+        return new PageImpl<>(result, pageable, total);
     }
 
     @Override

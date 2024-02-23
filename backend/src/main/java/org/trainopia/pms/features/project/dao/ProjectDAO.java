@@ -35,12 +35,4 @@ public interface ProjectDAO {
      */
     public void deleteById(int id);
 
-    /**
-     * @return List of all projects with projects expenses
-     */
-    public List<Project> findAllWithExpenses();
-
-
-
-
 }
