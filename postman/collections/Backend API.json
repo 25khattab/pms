@@ -1,0 +1,912 @@
+{
+	"info": {
+		"_postman_id": "98acca8b-a393-46d3-89b0-7b19190b73e3",
+		"name": "Backend API",
+		"description": "backend API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "26813064-98acca8b-a393-46d3-89b0-7b19190b73e3"
+	},
+	"item": [
+		{
+			"name": "projects",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "GET projects/{id}",
+							"id": "97d6a578-0f0f-4cd9-99c1-2e1767c383c3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/projects/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"projects",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<integer>",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "d8e5fea5-60e8-4732-9941-de8f1b31c050",
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/projects/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"projects",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"title\": \"<string>\",\n  \"minAge\": \"<integer>\",\n  \"maxAge\": \"<integer>\",\n  \"price\": \"<double>\",\n  \"location\": \"<string>\",\n  \"projectDetails\": {\n    \"description\": \"<string>\",\n    \"imagesFolderURL\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  \"projectExpenses\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"id\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+								}
+							]
+						}
+					],
+					"id": "4bd0d4bf-120d-4ebc-965d-2ffbb2f11c7c"
+				},
+				{
+					"name": "POST projects",
+					"id": "10c78966-1b5a-4069-b6f3-ff6f3a8a69e8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"<string>\",\n  \"minAge\": \"<integer>\",\n  \"maxAge\": \"<integer>\",\n  \"price\": \"<double>\",\n  \"location\": \"<string>\",\n  \"projectDetails\": {\n    \"description\": \"<string>\",\n    \"imagesFolderURL\": \"<string>\"\n  }\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/projects",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "22ef661e-41ce-4857-b2f4-31be413b3927",
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"<string>\",\n  \"minAge\": \"<integer>\",\n  \"maxAge\": \"<integer>\",\n  \"price\": \"<double>\",\n  \"location\": \"<string>\",\n  \"projectDetails\": {\n    \"description\": \"<string>\",\n    \"imagesFolderURL\": \"<string>\"\n  }\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/projects",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"projects"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"minAge\": \"<integer>\",\n  \"maxAge\": \"<integer>\",\n  \"price\": \"<double>\",\n  \"location\": \"<string>\",\n  \"projectDetails\": {\n    \"description\": \"<string>\",\n    \"imagesFolderURL\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  \"projectExpenses\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"id\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GET projects",
+					"id": "94a7fbaa-bb58-48c8-9c1e-0f028cbab9eb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/projects?page=0&size=3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"projects"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "140e020a-da99-4492-8a4b-a10d768a7c2e",
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/projects?page=0&size=3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"projects"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				}
+			],
+			"id": "c3c0fa0e-ff96-49b2-810f-4aa4eaa60bc1"
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "POST users",
+					"id": "44cc8b74-3d23-4646-9c77-9f679933f60a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"<string>\",\n  \"userName\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "5545f280-dd3a-4c50-8c08-e31b9bbbea80",
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"<string>\",\n  \"userName\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"role\": \"VOLUNTEER\",\n  \"userLoginData\": {\n    \"userName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  \"id\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GET users",
+					"id": "05605584-89a9-4c0b-8cd9-44081d9b214a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "d25f03d9-4f11-4f75-a88a-fb70780e8ca9",
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"headers\": {}\n}"
+						}
+					]
+				}
+			],
+			"id": "25c5bfc3-a044-437b-8042-6ed644eb2dd8"
+		},
+		{
+			"name": "<unknown>",
+			"item": [
+				{
+					"name": "GET ${..}",
+					"id": "5a102502-6f5e-406b-96be-746ad555efac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/<unknown>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"<unknown>"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "5557a815-6121-4e6f-bf3a-20658fa92fff",
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/<unknown>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"<unknown>"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"headers\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT ${..}",
+					"id": "d4ab5cf6-2b83-4cdc-8e39-c5520ee3d5c9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/<unknown>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"<unknown>"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "3562424e-c02b-43f7-a16e-d58286abaa29",
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/<unknown>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"<unknown>"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"headers\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "POST ${..}",
+					"id": "ee734d40-2cd6-481c-a0d8-9ded08a53afd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/<unknown>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"<unknown>"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "e0c10340-9f0c-411b-a27f-8199c70dffc0",
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/<unknown>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"<unknown>"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"headers\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE ${..}",
+					"id": "2e45872b-7527-4417-b1f1-5c59aa747894",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/<unknown>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"<unknown>"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "a446577d-ea78-4d96-baf8-6b3f533f1989",
+							"name": "OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/<unknown>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"<unknown>"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"headers\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "OPTIONS ${..}",
+					"id": "2ec6e63b-1232-472e-b065-9a44b874b5b7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "OPTIONS",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/<unknown>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"<unknown>"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "08a383c5-1fcd-4cfa-b556-20462c785418",
+							"name": "OK",
+							"originalRequest": {
+								"method": "OPTIONS",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/<unknown>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"<unknown>"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"headers\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "HEAD ${..}",
+					"id": "82302463-1355-415e-90fc-ed336c25c211",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/<unknown>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"<unknown>"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "709c0524-e560-4835-b806-2ef25a3652b4",
+							"name": "OK",
+							"originalRequest": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/<unknown>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"<unknown>"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"headers\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "PATCH ${..}",
+					"id": "b88ecfdb-baaf-4003-bed5-03854876c695",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/<unknown>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"<unknown>"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "a9d7ca6e-7749-46d7-96ba-f376af1d13eb",
+							"name": "OK",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/<unknown>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"<unknown>"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"headers\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "TRACE ${..}",
+					"id": "aaef610f-b2f3-416a-aede-676b4ca294a5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "TRACE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/<unknown>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"<unknown>"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "eae9d528-bbef-44c3-b903-cc599f6296d8",
+							"name": "OK",
+							"originalRequest": {
+								"method": "TRACE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/<unknown>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"<unknown>"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"headers\": {}\n}"
+						}
+					]
+				}
+			],
+			"id": "ffacb952-05ad-429c-9d00-0850f747db89"
+		}
+	],
+	"variable": [
+		{
+			"id": "67249a47-58a0-43f3-9b2a-7c2050729e8e",
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}
