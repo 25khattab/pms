@@ -3,12 +3,15 @@ package org.trainopia.pms.features.projectExpense;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.trainopia.pms.features.project.Project;
 
-import java.time.LocalDateTime;
-
+@Setter
+@Getter
 @Entity
 @Table(name = "project_expense")
 public class ProjectExpense {
@@ -33,8 +36,7 @@ public class ProjectExpense {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @ManyToOne(fetch = FetchType.EAGER,
-            cascade = {CascadeType.REMOVE})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "project_id")
     @JsonIgnore
     private Project project;
@@ -48,62 +50,10 @@ public class ProjectExpense {
         this.price = price;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     @Override
     public String toString() {
-        return "ProjectExpense{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+        return "ProjectExpense{" + "id=" + id + ", name='" + name + '\'' + ","
+                + " price=" + price + ", createdAt=" + createdAt + ", " +
+                "updatedAt" + "=" + updatedAt + '}';
     }
 }

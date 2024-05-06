@@ -3,11 +3,14 @@ package org.trainopia.pms.features.project.dto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 import org.trainopia.pms.features.projectDetails.ProjectDetails;
 import org.trainopia.pms.utility.BaseDTO;
 
-import java.time.LocalDateTime;
-
+@Getter
+@Setter
 public class ProjectDTO extends BaseDTO {
 
     @NotBlank(message = "title shouldn't be empty")
@@ -26,62 +29,14 @@ public class ProjectDTO extends BaseDTO {
     private String location;
     private ProjectDetails projectDetails;
 
-    public ProjectDTO(int id, LocalDateTime createdAt, LocalDateTime updatedAt, String title, int minAge, int maxAge, double price,
-                      String location, ProjectDetails projectDetails) {
+    public ProjectDTO(int id, LocalDateTime createdAt, LocalDateTime updatedAt, String title, int minAge, int maxAge,
+                      double price, String location, ProjectDetails projectDetails) {
         super(id, createdAt, updatedAt);
         this.title = title;
         this.minAge = minAge;
         this.maxAge = maxAge;
         this.price = price;
         this.location = location;
-        this.projectDetails = projectDetails;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getMinAge() {
-        return minAge;
-    }
-
-    public void setMinAge(int minAge) {
-        this.minAge = minAge;
-    }
-
-    public int getMaxAge() {
-        return maxAge;
-    }
-
-    public void setMaxAge(int maxAge) {
-        this.maxAge = maxAge;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public ProjectDetails getProjectDetails() {
-        return projectDetails;
-    }
-
-    public void setProjectDetails(ProjectDetails projectDetails) {
         this.projectDetails = projectDetails;
     }
 }

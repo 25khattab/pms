@@ -1,23 +1,22 @@
 package org.trainopia.pms.features.project;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.PositiveOrZero;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.trainopia.pms.features.project.dto.CreateProjectDTO;
 import org.trainopia.pms.features.project.dto.ProjectDTO;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
 @RequestMapping("/projects")
-@Validated
 public class ProjectController {
 
     ProjectService projectService;
@@ -43,19 +42,32 @@ public class ProjectController {
             // sort=[field, direction]
             orders.add(new Order(sort[1].equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sort[0]));
         }
-        Pageable paging = PageRequest.of(page, size,Sort.by(orders));
+        Pageable paging = PageRequest.of(page, size, Sort.by(orders));
 
         return projectService.findAll(paging);
     }
 
-    @GetMapping("/{id}")
-    public Project getProjectById(@PathVariable int id) {
-        return projectService.findById(id);
+    @GetMapping("/{projectId}")
+    public Project getProjectById(@Valid @PositiveOrZero @PathVariable int projectId) {
+        return projectService.findById(projectId);
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Project createProject(@Valid @RequestBody CreateProjectDTO projectDTO) {
         return projectService.create(projectDTO);
+    }
+
+    //TODO make partial update
+    @PutMapping("/{projectId}")
+    public Project updateProject(@Valid @PositiveOrZero @PathVariable int projectId,@RequestBody CreateProjectDTO projectDTO) {
+        return projectService.update(projectId,projectDTO);
+    }
+
+    @DeleteMapping("/{projectId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProject(@Valid @PositiveOrZero @PathVariable int projectId) {
+        projectService.deleteById(projectId);
     }
 
 }

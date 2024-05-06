@@ -4,21 +4,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.trainopia.pms.features.project.dto.CreateProjectDTO;
 import org.trainopia.pms.features.project.dto.ProjectDTO;
-
-import java.util.List;
+import org.trainopia.pms.features.projectExpense.dto.ProjectExpenseDTO;
 
 public interface ProjectService {
-    Project findById(int id);
+  Project findById(int id);
 
-    Project create(CreateProjectDTO createProjectDTO);
+  Project create(CreateProjectDTO createProjectDTO);
 
-    Page<ProjectDTO> findAll(Pageable pageable);
+  Project update(int projectId, CreateProjectDTO createProjectDTO);
 
-//    List<Project> findAllWithExpenses();
-//
-//    Project findWithExpensesById(int id);
-//
-//    Project update(Project project);
-//
-//    void deleteById(int id);
+  Page<ProjectDTO> findAll(Pageable pageable);
+
+  void deleteById(int projectId);
+
+  Project createExpense(int projectId, ProjectExpenseDTO projectExpense);
+
+  Project updateExpense(int projectId, int projectExpenseID, ProjectExpenseDTO projectExpense);
+
+  void deleteExpense(int projectId, int projectExpenseID);
 }
