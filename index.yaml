@@ -1,71 +1,11 @@
-openapi: "3.0.3"
+openapi: "3.0.0"
 info:
   title: "backend API"
   description: "backend API"
   version: "1.0.0"
 servers:
-  - url: "http://localhost:8080"
+  - url: "https://backend"
 paths:
-  /projects:
-    post:
-      summary: "POST projects"
-      operationId: "createProject"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateProjectDTO"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/Project"
-    get:
-      summary: "GET projects"
-      operationId: "getAllProjects"
-      parameters:
-        - name: "page"
-          in: "query"
-          required: false
-          schema:
-            type: "integer"
-            format: "int32"
-            default: "0"
-        - name: "size"
-          in: "query"
-          required: false
-          schema:
-            type: "integer"
-            format: "int32"
-            default: "3"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/Page"
-  /projects/{id}:
-    get:
-      summary: "GET projects/{id}"
-      operationId: "getProjectById"
-      parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "integer"
-            format: "int32"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/Project"
   /users:
     post:
       summary: "POST users"
@@ -92,90 +32,239 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/ResponseEntity"
-  /<unknown>:
-    get:
-      summary: "GET ${..}"
-      operationId: "error"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ResponseEntity"
+                type: "object"
+  /projects/{projectId}:
     put:
-      summary: "PUT ${..}"
-      operationId: "error"
+      summary: "PUT projects/{projectId}"
+      operationId: "updateProject"
+      parameters:
+        - name: "projectId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProjectDTO"
+        required: true
       responses:
         "200":
           description: "OK"
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/ResponseEntity"
-    post:
-      summary: "POST ${..}"
-      operationId: "error"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ResponseEntity"
+                $ref: "#/components/schemas/Project"
     delete:
-      summary: "DELETE ${..}"
-      operationId: "error"
+      summary: "DELETE projects/{projectId}"
+      operationId: "deleteProject"
+      parameters:
+        - name: "projectId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "204":
+          description: "No Content"
+    get:
+      summary: "GET projects/{projectId}"
+      operationId: "getProjectById"
+      parameters:
+        - name: "projectId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
       responses:
         "200":
           description: "OK"
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/ResponseEntity"
-    options:
-      summary: "OPTIONS ${..}"
-      operationId: "error"
+                $ref: "#/components/schemas/Project"
+  /projects:
+    post:
+      summary: "POST projects"
+      operationId: "createProject"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProjectDTO"
+        required: true
+      responses:
+        "201":
+          description: "Created"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Project"
+    get:
+      summary: "GET projects"
+      operationId: "getAllProjects"
+      parameters:
+        - name: "page"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            format: "int32"
+            default: "0"
+        - name: "size"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            format: "int32"
+            default: "3"
+        - name: "sort"
+          in: "query"
+          required: false
+          schema:
+            type: "array"
+            items:
+              type: "string"
+            default: "id,desc"
       responses:
         "200":
           description: "OK"
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/ResponseEntity"
-    head:
-      summary: "HEAD ${..}"
-      operationId: "error"
+                $ref: "#/components/schemas/ProjectDTO"
+  /projects/{projectId}/expenses/{expenseId}:
+    put:
+      summary: "PUT projects/{projectId}/expenses/{expenseId}"
+      operationId: "createProjectExpense"
+      parameters:
+        - name: "projectId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "expenseId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectExpenseDTO"
+        required: true
       responses:
         "200":
           description: "OK"
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/ResponseEntity"
-    patch:
-      summary: "PATCH ${..}"
-      operationId: "error"
+                $ref: "#/components/schemas/Project"
+    delete:
+      summary: "DELETE projects/{projectId}/expenses/{expenseId}"
+      operationId: "deleteProjectExpense"
+      parameters:
+        - name: "projectId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "expenseId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
       responses:
-        "200":
-          description: "OK"
+        "204":
+          description: "No Content"
+  /projects/{projectId}/expenses:
+    post:
+      summary: "POST projects/{projectId}/expenses"
+      operationId: "createProjectExpense"
+      parameters:
+        - name: "projectId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectExpenseDTO"
+        required: true
+      responses:
+        "201":
+          description: "Created"
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/ResponseEntity"
-    trace:
-      summary: "TRACE ${..}"
-      operationId: "error"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ResponseEntity"
+                $ref: "#/components/schemas/Project"
 components:
   schemas:
+    CreateUserDTO:
+      type: "object"
+      properties:
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        email:
+          type: "string"
+        password:
+          type: "string"
+        userName:
+          type: "string"
+    UserLoginData:
+      type: "object"
+      properties:
+        userName:
+          type: "string"
+        email:
+          type: "string"
+        id:
+          type: "integer"
+          format: "int32"
+        createdAt:
+          type: "string"
+          format: "date-time"
+        updatedAt:
+          type: "string"
+          format: "date-time"
+    User:
+      type: "object"
+      properties:
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        role:
+          type: "string"
+          enum:
+            - "MANAGER"
+            - "PROJECT_MANAGER"
+            - "VOLUNTEER"
+        userLoginData:
+          $ref: "#/components/schemas/UserLoginData"
+        id:
+          type: "integer"
+          format: "int32"
+        createdAt:
+          type: "string"
+          format: "date-time"
+        updatedAt:
+          type: "string"
+          format: "date-time"
     ProjectDetailsDTO:
       type: "object"
       properties:
@@ -265,29 +354,24 @@ components:
         updatedAt:
           type: "string"
           format: "date-time"
-    Page:
-      type: "object"
-      properties: { }
-    CreateUserDTO:
+    ProjectDTO:
       type: "object"
       properties:
-        firstName:
+        title:
           type: "string"
-        lastName:
+        minAge:
+          type: "integer"
+          format: "int32"
+        maxAge:
+          type: "integer"
+          format: "int32"
+        price:
+          type: "number"
+          format: "double"
+        location:
           type: "string"
-        email:
-          type: "string"
-        password:
-          type: "string"
-        userName:
-          type: "string"
-    UserLoginData:
-      type: "object"
-      properties:
-        userName:
-          type: "string"
-        email:
-          type: "string"
+        projectDetails:
+          $ref: "#/components/schemas/ProjectDetails"
         id:
           type: "integer"
           format: "int32"
@@ -297,53 +381,11 @@ components:
         updatedAt:
           type: "string"
           format: "date-time"
-    User:
+    ProjectExpenseDTO:
       type: "object"
       properties:
-        firstName:
+        name:
           type: "string"
-        lastName:
-          type: "string"
-        role:
-          type: "string"
-          enum:
-            - "MANAGER"
-            - "PROJECT_MANAGER"
-            - "VOLUNTEER"
-        userLoginData:
-          $ref: "#/components/schemas/UserLoginData"
-        id:
+        price:
           type: "integer"
           format: "int32"
-        createdAt:
-          type: "string"
-          format: "date-time"
-        updatedAt:
-          type: "string"
-          format: "date-time"
-    HttpHeaders:
-      type: "object"
-      properties: { }
-    ResponseEntity:
-      type: "object"
-      properties:
-        headers:
-          $ref: "#/components/schemas/HttpHeaders"
-    Object:
-      type: "object"
-      properties: { }
-    ModelMap:
-      type: "object"
-      properties: { }
-    HttpStatusCode:
-      type: "object"
-      properties: { }
-    ModelAndView:
-      type: "object"
-      properties:
-        view:
-          $ref: "#/components/schemas/Object"
-        model:
-          $ref: "#/components/schemas/ModelMap"
-        status:
-          $ref: "#/components/schemas/HttpStatusCode"
