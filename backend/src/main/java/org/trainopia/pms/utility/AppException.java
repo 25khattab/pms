@@ -1,12 +1,15 @@
 package org.trainopia.pms.utility;
 
-import org.springframework.http.HttpStatus;
-
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.http.HttpStatus;
+
+@Setter
+@Getter
 public class AppException extends RuntimeException {
     private String functionName;
     private String className;
@@ -31,46 +34,6 @@ public class AppException extends RuntimeException {
         this.status = status;
         this.timeStamp = LocalDateTime.now();
         this.errors = errors;
-    }
-
-    public HttpStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(HttpStatus status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(LocalDateTime timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    public List<CommonError> getErrors() {
-        return errors;
-    }
-
-    public void setErrors(List<CommonError> errors) {
-        this.errors = errors;
-    }
-
-    public String getFunctionName() {
-        return functionName;
-    }
-
-    public void setFunctionName(String functionName) {
-        this.functionName = functionName;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
     }
 
     @Override

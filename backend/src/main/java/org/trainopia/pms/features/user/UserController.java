@@ -9,16 +9,15 @@ import org.trainopia.pms.features.user.dto.CreateUserDTO;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    @Autowired
-    UserService userService;
+  @Autowired UserService userService;
 
-    @GetMapping
-    public ResponseEntity<?> findAllUsers() {
-        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
-    }
+  @GetMapping
+  public ResponseEntity<?> findAllUsers() {
+    return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+  }
 
-    @PostMapping
-    public User createUser(@RequestBody CreateUserDTO createUserDTO) {
-        return userService.create(createUserDTO);
-    }
+  @PostMapping
+  public User createUser(@RequestBody CreateUserDTO createUserDTO) {
+    return userService.create(createUserDTO);
+  }
 }

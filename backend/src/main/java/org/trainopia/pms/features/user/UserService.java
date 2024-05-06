@@ -1,19 +1,18 @@
 package org.trainopia.pms.features.user;
 
-import org.trainopia.pms.features.user.dto.CreateUserDTO;
-import org.trainopia.pms.features.user.dto.UserDTO;
-
 import java.util.List;
-import java.util.Optional;
+import org.trainopia.pms.features.user.dto.CreateUserDTO;
 
 public interface UserService {
 
-    public List<User> findAll();
+    List<User> findAll();
 
     //    public List<User> findAllWithLoginData ();
-    public User findById();
+    User findById();
 
-    public User create(CreateUserDTO createUserDTO);
+    User create(CreateUserDTO createUserDTO);
+
+    Boolean getExistEmail(String email);
     //   public User findByIdWithLoginData ();
 }
 

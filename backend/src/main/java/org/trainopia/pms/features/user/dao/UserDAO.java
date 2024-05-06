@@ -1,10 +1,8 @@
 package org.trainopia.pms.features.user.dao;
 
-import org.trainopia.pms.features.user.User;
-import org.trainopia.pms.features.user.dto.UserDTO;
-
 import java.util.List;
 import java.util.Optional;
+import org.trainopia.pms.features.user.User;
 
 public interface UserDAO {
     public List<User> findAll();

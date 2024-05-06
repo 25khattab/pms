@@ -1,14 +1,8 @@
 package org.trainopia.pms.features.user;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.trainopia.pms.features.userLoginData.UserLoginData;
 import org.trainopia.pms.utility.BaseEntity;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user")

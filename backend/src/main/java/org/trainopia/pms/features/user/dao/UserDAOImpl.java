@@ -1,50 +1,36 @@
 package org.trainopia.pms.features.user.dao;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import org.trainopia.pms.features.user.User;
-import org.trainopia.pms.features.user.dto.UserDTO;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.trainopia.pms.features.user.User;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public UserDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    //    @Query("SELECT u from User u join fetch u.userLoginData where u.id=:id")
-    //    public Optional<User> findByIdWithLoginData(int id){
-    //
-    //    }
-
     @Override
     public List<User> findAll() {
         return entityManager.createQuery("from User", User.class).getResultList();
     }
 
-    @Query("")
     public List<User> findAllWithLoginData() {
         return entityManager.createQuery("SELECT u from User u join fetch u.userLoginData", User.class).getResultList();
     }
 
     @Override
-    @Transactional
     public void save(User user) {
         entityManager.persist(user);
-        ;
+
     }
 
     @Override
@@ -64,15 +50,14 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public Optional<User> findByEmailOrUserName(String email, String userName) {
 
-        TypedQuery<User> query =
-            entityManager.createQuery("""
-                                          select u from User u join fetch u.userLoginData
-                                          where u.userLoginData.email=:email or u.userLoginData.userName=:userName """,
-                                      User.class);
+        TypedQuery<User> query = entityManager.createQuery("""
+                select u from User u join fetch u.userLoginData
+                where u.userLoginData.email=:email or u.userLoginData.userName=:userName
+                """, User.class);
         query.setParameter("email", email);
         query.setParameter("userName", userName);
         List<User> result = query.getResultList();
-        return result.size() == 0 ? Optional.empty() : Optional.of(result.get(0));
+        return result.isEmpty() ? Optional.empty() : Optional.of(result.get(0));
 
     }
 
