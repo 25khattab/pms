@@ -1,0 +1,349 @@
+openapi: "3.0.3"
+info:
+  title: "backend API"
+  description: "backend API"
+  version: "1.0.0"
+servers:
+  - url: "http://localhost:8080"
+paths:
+  /projects:
+    post:
+      summary: "POST projects"
+      operationId: "createProject"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProjectDTO"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Project"
+    get:
+      summary: "GET projects"
+      operationId: "getAllProjects"
+      parameters:
+        - name: "page"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            format: "int32"
+            default: "0"
+        - name: "size"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            format: "int32"
+            default: "3"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Page"
+  /projects/{id}:
+    get:
+      summary: "GET projects/{id}"
+      operationId: "getProjectById"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Project"
+  /users:
+    post:
+      summary: "POST users"
+      operationId: "createUser"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDTO"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/User"
+    get:
+      summary: "GET users"
+      operationId: "findAllUsers"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+  /<unknown>:
+    get:
+      summary: "GET ${..}"
+      operationId: "error"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+    put:
+      summary: "PUT ${..}"
+      operationId: "error"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+    post:
+      summary: "POST ${..}"
+      operationId: "error"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+    delete:
+      summary: "DELETE ${..}"
+      operationId: "error"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+    options:
+      summary: "OPTIONS ${..}"
+      operationId: "error"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+    head:
+      summary: "HEAD ${..}"
+      operationId: "error"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+    patch:
+      summary: "PATCH ${..}"
+      operationId: "error"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+    trace:
+      summary: "TRACE ${..}"
+      operationId: "error"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+components:
+  schemas:
+    ProjectDetailsDTO:
+      type: "object"
+      properties:
+        description:
+          type: "string"
+        imagesFolderURL:
+          type: "string"
+    CreateProjectDTO:
+      type: "object"
+      properties:
+        title:
+          type: "string"
+        minAge:
+          type: "integer"
+          format: "int32"
+        maxAge:
+          type: "integer"
+          format: "int32"
+        price:
+          type: "number"
+          format: "double"
+        location:
+          type: "string"
+        projectDetails:
+          $ref: "#/components/schemas/ProjectDetailsDTO"
+    ProjectDetails:
+      type: "object"
+      properties:
+        description:
+          type: "string"
+        imagesFolderURL:
+          type: "string"
+        id:
+          type: "integer"
+          format: "int32"
+        createdAt:
+          type: "string"
+          format: "date-time"
+        updatedAt:
+          type: "string"
+          format: "date-time"
+    ProjectExpense:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        name:
+          type: "string"
+        price:
+          type: "integer"
+          format: "int32"
+        createdAt:
+          type: "string"
+          format: "date-time"
+        updatedAt:
+          type: "string"
+          format: "date-time"
+    Project:
+      type: "object"
+      properties:
+        title:
+          type: "string"
+        minAge:
+          type: "integer"
+          format: "int32"
+        maxAge:
+          type: "integer"
+          format: "int32"
+        price:
+          type: "number"
+          format: "double"
+        location:
+          type: "string"
+        projectDetails:
+          $ref: "#/components/schemas/ProjectDetails"
+        projectExpenses:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ProjectExpense"
+        id:
+          type: "integer"
+          format: "int32"
+        createdAt:
+          type: "string"
+          format: "date-time"
+        updatedAt:
+          type: "string"
+          format: "date-time"
+    Page:
+      type: "object"
+      properties: { }
+    CreateUserDTO:
+      type: "object"
+      properties:
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        email:
+          type: "string"
+        password:
+          type: "string"
+        userName:
+          type: "string"
+    UserLoginData:
+      type: "object"
+      properties:
+        userName:
+          type: "string"
+        email:
+          type: "string"
+        id:
+          type: "integer"
+          format: "int32"
+        createdAt:
+          type: "string"
+          format: "date-time"
+        updatedAt:
+          type: "string"
+          format: "date-time"
+    User:
+      type: "object"
+      properties:
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        role:
+          type: "string"
+          enum:
+            - "MANAGER"
+            - "PROJECT_MANAGER"
+            - "VOLUNTEER"
+        userLoginData:
+          $ref: "#/components/schemas/UserLoginData"
+        id:
+          type: "integer"
+          format: "int32"
+        createdAt:
+          type: "string"
+          format: "date-time"
+        updatedAt:
+          type: "string"
+          format: "date-time"
+    HttpHeaders:
+      type: "object"
+      properties: { }
+    ResponseEntity:
+      type: "object"
+      properties:
+        headers:
+          $ref: "#/components/schemas/HttpHeaders"
+    Object:
+      type: "object"
+      properties: { }
+    ModelMap:
+      type: "object"
+      properties: { }
+    HttpStatusCode:
+      type: "object"
+      properties: { }
+    ModelAndView:
+      type: "object"
+      properties:
+        view:
+          $ref: "#/components/schemas/Object"
+        model:
+          $ref: "#/components/schemas/ModelMap"
+        status:
+          $ref: "#/components/schemas/HttpStatusCode"
