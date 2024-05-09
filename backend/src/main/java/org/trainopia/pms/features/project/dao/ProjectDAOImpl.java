@@ -62,8 +62,7 @@ public class ProjectDAOImpl implements ProjectDAO {
             .createQuery(
                 "FROM Project p "
                     + "left join fetch  p.projectExpenses join fetch"
-                    + "  p"
-                    + ".projectDetails where p.id=:id",
+                    + " p.projectDetails where p.id=:id",
                 Project.class)
             .setParameter("id", id)
             .getResultList();
@@ -71,7 +70,11 @@ public class ProjectDAOImpl implements ProjectDAO {
   }
 
   @Override
-  @Transactional
+  public Project findProxyById(int id) {
+    return entityManager.getReference(Project.class, id);
+  }
+
+  @Override
   public Project save(Project project) {
     entityManager.persist(project);
     return project;

@@ -6,34 +6,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.trainopia.pms.features.project.Project;
-import org.trainopia.pms.features.project.ProjectService;
 import org.trainopia.pms.features.projectExpense.dto.ProjectExpenseDTO;
 
 @RestController
 @RequestMapping("/projects/{projectId}/expenses")
 public class ProjectExpenseController {
 
-  ProjectService projectService;
+  ProjectExpenseService projectExpenseService;
 
   @Autowired
-  public ProjectExpenseController(ProjectService projectService) {
-    this.projectService = projectService;
+  public ProjectExpenseController(ProjectExpenseService projectExpenseService) {
+    this.projectExpenseService = projectExpenseService;
   }
 
   @PostMapping()
   @ResponseStatus(HttpStatus.CREATED)
-  public Project createProjectExpense(
+  public ProjectExpense createProjectExpense(
       @Valid @PositiveOrZero @PathVariable int projectId,
       @Valid @RequestBody ProjectExpenseDTO projectExpense) {
-    return projectService.createExpense(projectId, projectExpense);
+    return projectExpenseService.createExpense(projectId, projectExpense);
   }
 
   @PutMapping("/{expenseId}")
-  public Project createProjectExpense(
+  public ProjectExpense updateProjectExpense(
       @Valid @PositiveOrZero @PathVariable int projectId,
       @Valid @PositiveOrZero @PathVariable int expenseId,
       @Valid @RequestBody ProjectExpenseDTO projectExpense) {
-    return projectService.updateExpense(projectId, expenseId, projectExpense);
+    return projectExpenseService.updateExpense(projectId, expenseId, projectExpense);
   }
 
   @DeleteMapping("/{expenseId}")
@@ -41,6 +40,6 @@ public class ProjectExpenseController {
   public void deleteProjectExpense(
       @Valid @PositiveOrZero @PathVariable int projectId,
       @Valid @PositiveOrZero @PathVariable int expenseId) {
-    projectService.deleteExpense(projectId, expenseId);
+    projectExpenseService.deleteExpense(projectId, expenseId);
   }
 }

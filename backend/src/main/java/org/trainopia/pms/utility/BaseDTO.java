@@ -7,18 +7,15 @@ import lombok.Setter;
 @Setter
 @Getter
 public class BaseDTO {
-    private int id;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+  private int id;
+  private LocalDateTime createdAt;
+  private LocalDateTime updatedAt;
 
-    public BaseDTO() {
+  public BaseDTO() {}
 
-    }
-
-    public BaseDTO(int id, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
+  public BaseDTO(int id, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    this.id = id;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+  }
 }

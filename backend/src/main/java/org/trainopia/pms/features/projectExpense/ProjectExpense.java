@@ -1,6 +1,5 @@
 package org.trainopia.pms.features.projectExpense;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -16,44 +15,54 @@ import org.trainopia.pms.features.project.Project;
 @Table(name = "project_expense")
 public class ProjectExpense {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private int id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+  @Column(name = "name")
+  private String name;
 
-    @Column(name = "name")
-    private String name;
+  @Column(name = "price")
+  private int price;
 
-    @Column(name = "price")
-    private int price;
+  @CreationTimestamp
+  @Column(name = "created_at", updatable = false)
+  private LocalDateTime createdAt;
 
-    @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+  @UpdateTimestamp
+  @Column(name = "updated_at")
+  private LocalDateTime updatedAt;
 
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "project_id")
+  @JsonIgnore
+  private Project project;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE})
-    @JoinColumn(name = "project_id")
-    @JsonIgnore
-    private Project project;
+  public ProjectExpense() {}
 
-    public ProjectExpense() {
+  public ProjectExpense(String name, int price) {
+    this.name = name;
+    this.price = price;
+  }
 
-    }
-
-    public ProjectExpense(String name, int price) {
-        this.name = name;
-        this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return "ProjectExpense{" + "id=" + id + ", name='" + name + '\'' + ","
-                + " price=" + price + ", createdAt=" + createdAt + ", " +
-                "updatedAt" + "=" + updatedAt + '}';
-    }
+  @Override
+  public String toString() {
+    return "ProjectExpense{"
+        + "id="
+        + id
+        + ", name='"
+        + name
+        + '\''
+        + ","
+        + " price="
+        + price
+        + ", createdAt="
+        + createdAt
+        + ", "
+        + "updatedAt"
+        + "="
+        + updatedAt
+        + '}';
+  }
 }

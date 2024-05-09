@@ -5,14 +5,13 @@ import org.trainopia.pms.features.user.dto.CreateUserDTO;
 
 public interface UserService {
 
-    List<User> findAll();
+  List<User> findAll();
 
-    //    public List<User> findAllWithLoginData ();
-    User findById();
+  //    public List<User> findAllWithLoginData ();
+  User findById();
 
-    User create(CreateUserDTO createUserDTO);
+  User create(CreateUserDTO createUserDTO);
 
-    Boolean getExistEmail(String email);
-    //   public User findByIdWithLoginData ();
+  Boolean getExistEmail(String email);
+  //   public User findByIdWithLoginData ();
 }
-

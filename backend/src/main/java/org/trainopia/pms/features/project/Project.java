@@ -37,15 +37,9 @@ public class Project extends BaseEntity {
   @OneToMany(
       mappedBy = "project",
       fetch = FetchType.LAZY,
-      orphanRemoval = true,
-      // to remove the entity entirely when setting project null
-      cascade = {
-        CascadeType.DETACH,
-        CascadeType.MERGE,
-        CascadeType.PERSIST,
-        CascadeType.REFRESH,
-      })
-  private List<ProjectExpense> projectExpenses;
+      orphanRemoval = true, // to remove the entity entirely when setting project null
+      cascade = {CascadeType.ALL})
+  private List<ProjectExpense> projectExpenses=new ArrayList<>();
 
   public Project() {}
 
@@ -58,21 +52,14 @@ public class Project extends BaseEntity {
   }
 
   public Project addProjectExpense(ProjectExpense tempProjectExpense) {
-    if (projectExpenses == null) {
-      projectExpenses = new ArrayList<>();
-    }
     projectExpenses.add(tempProjectExpense);
     tempProjectExpense.setProject(this);
     return this;
   }
 
-  public Project deleteProjectExpense(ProjectExpense tempProjectExpense) {
-    if (projectExpenses == null) {
-      projectExpenses = new ArrayList<>();
-    }
+  public void deleteProjectExpense(ProjectExpense tempProjectExpense) {
     projectExpenses.remove(tempProjectExpense);
     tempProjectExpense.setProject(null);
-    return this;
   }
 
   @Override

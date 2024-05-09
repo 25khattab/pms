@@ -7,58 +7,57 @@ import org.trainopia.pms.utility.BaseEntity;
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity {
-    @Column(name = "first_name")
-    private String firstName;
+  @Column(name = "first_name")
+  private String firstName;
 
-    @Column(name = "last_name")
-    private String lastName;
+  @Column(name = "last_name")
+  private String lastName;
 
-    @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private UserRole role = UserRole.VOLUNTEER;
+  @Column(name = "role")
+  @Enumerated(EnumType.STRING)
+  private UserRole role = UserRole.VOLUNTEER;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_login_data_id")
-    private UserLoginData userLoginData;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "user_login_data_id")
+  private UserLoginData userLoginData;
 
-    public User() {
-    }
+  public User() {}
 
-    public User(String firstName, String lastName, UserRole role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.role = role;
-    }
+  public User(String firstName, String lastName, UserRole role) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.role = role;
+  }
 
-    public String getFirstName() {
-        return firstName;
-    }
+  public String getFirstName() {
+    return firstName;
+  }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-    public String getLastName() {
-        return lastName;
-    }
+  public String getLastName() {
+    return lastName;
+  }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-    public UserRole getRole() {
-        return role;
-    }
+  public UserRole getRole() {
+    return role;
+  }
 
-    public void setRole(UserRole role) {
-        this.role = role;
-    }
+  public void setRole(UserRole role) {
+    this.role = role;
+  }
 
-    public UserLoginData getUserLoginData() {
-        return userLoginData;
-    }
+  public UserLoginData getUserLoginData() {
+    return userLoginData;
+  }
 
-    public void setUserLoginData(UserLoginData userLoginData) {
-        this.userLoginData = userLoginData;
-    }
+  public void setUserLoginData(UserLoginData userLoginData) {
+    this.userLoginData = userLoginData;
+  }
 }

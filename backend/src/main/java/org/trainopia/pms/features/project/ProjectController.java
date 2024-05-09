@@ -19,55 +19,44 @@ import org.trainopia.pms.features.project.dto.ProjectDTO;
 @RequestMapping("/projects")
 public class ProjectController {
 
-    ProjectService projectService;
+  ProjectService projectService;
 
-    @Autowired
-    public ProjectController(ProjectService projectService) {
-        this.projectService = projectService;
-    }
+  @Autowired
+  public ProjectController(ProjectService projectService) {
+    this.projectService = projectService;
+  }
 
-    @GetMapping
-    public Page<ProjectDTO> getAllProjects(@RequestParam(defaultValue = "0") int page,
-                                           @RequestParam(defaultValue = "3") int size,
-                                           @RequestParam(defaultValue = "id,desc") String[] sort) {
-        List<Order> orders = new ArrayList<>();
-        if (sort[0].contains(",")) {
-            // will sort more than 2 fields
-            // sortOrder="field, direction"
-            for (String sortOrder : sort) {
-                String[] _sort = sortOrder.split(",");
-                orders.add(new Order(_sort[1].equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, _sort[0]));
-            }
-        } else {
-            // sort=[field, direction]
-            orders.add(new Order(sort[1].equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sort[0]));
-        }
-        Pageable paging = PageRequest.of(page, size, Sort.by(orders));
+  @GetMapping
+  public Page<ProjectDTO> getAllProjects(
+      @RequestParam(defaultValue = "0") int pageNo,
+      @RequestParam(defaultValue = "10") int pageSize,
+      @RequestParam(defaultValue = "id") String sortBy,
+      @RequestParam(defaultValue = "ASC") String sortDirection) {
+    return projectService.findAll(pageNo, pageSize, sortBy, sortDirection);
+  }
 
-        return projectService.findAll(paging);
-    }
+  @GetMapping("/{projectId}")
+  public Project getProjectById(@Valid @PositiveOrZero @PathVariable int projectId) {
+    return projectService.findById(projectId);
+  }
 
-    @GetMapping("/{projectId}")
-    public Project getProjectById(@Valid @PositiveOrZero @PathVariable int projectId) {
-        return projectService.findById(projectId);
-    }
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  public Project createProject(@Valid @RequestBody CreateProjectDTO projectDTO) {
+    return projectService.create(projectDTO);
+  }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Project createProject(@Valid @RequestBody CreateProjectDTO projectDTO) {
-        return projectService.create(projectDTO);
-    }
+  // TODO make partial update
+  @PutMapping("/{projectId}")
+  public Project updateProject(
+      @Valid @PositiveOrZero @PathVariable int projectId,
+      @RequestBody CreateProjectDTO projectDTO) {
+    return projectService.update(projectId, projectDTO);
+  }
 
-    //TODO make partial update
-    @PutMapping("/{projectId}")
-    public Project updateProject(@Valid @PositiveOrZero @PathVariable int projectId,@RequestBody CreateProjectDTO projectDTO) {
-        return projectService.update(projectId,projectDTO);
-    }
-
-    @DeleteMapping("/{projectId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProject(@Valid @PositiveOrZero @PathVariable int projectId) {
-        projectService.deleteById(projectId);
-    }
-
+  @DeleteMapping("/{projectId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteProject(@Valid @PositiveOrZero @PathVariable int projectId) {
+    projectService.deleteById(projectId);
+  }
 }

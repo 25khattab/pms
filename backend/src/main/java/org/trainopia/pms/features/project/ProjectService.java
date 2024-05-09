@@ -4,22 +4,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.trainopia.pms.features.project.dto.CreateProjectDTO;
 import org.trainopia.pms.features.project.dto.ProjectDTO;
-import org.trainopia.pms.features.projectExpense.dto.ProjectExpenseDTO;
+
+import java.util.List;
 
 public interface ProjectService {
   Project findById(int id);
+
+  Project findProxyById(int id);
 
   Project create(CreateProjectDTO createProjectDTO);
 
   Project update(int projectId, CreateProjectDTO createProjectDTO);
 
-  Page<ProjectDTO> findAll(Pageable pageable);
+  Page<ProjectDTO> findAll(int pageNo, int pageSize, String sortBy, String sortDirection);
 
   void deleteById(int projectId);
-
-  Project createExpense(int projectId, ProjectExpenseDTO projectExpense);
-
-  Project updateExpense(int projectId, int projectExpenseID, ProjectExpenseDTO projectExpense);
-
-  void deleteExpense(int projectId, int projectExpenseID);
 }

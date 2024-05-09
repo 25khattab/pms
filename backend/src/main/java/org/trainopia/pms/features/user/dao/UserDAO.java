@@ -5,11 +5,15 @@ import java.util.Optional;
 import org.trainopia.pms.features.user.User;
 
 public interface UserDAO {
-    public List<User> findAll();
-    public List<User> findAllWithLoginData();
-    public void save(User user);
-    public void delete(User user);
-    public Optional<User> findById(int id);
+  List<User> findAll();
 
-    public Optional<User> findByEmailOrUserName(String email,String userName);
+  List<User> findAllWithLoginData();
+
+  void save(User user);
+
+  void delete(User user);
+
+  Optional<User> findById(int id);
+
+  Optional<User> findByEmailOrUserName(String email, String userName);
 }
