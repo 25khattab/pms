@@ -39,7 +39,7 @@ public class Project extends BaseEntity {
       fetch = FetchType.LAZY,
       orphanRemoval = true, // to remove the entity entirely when setting project null
       cascade = {CascadeType.ALL})
-  private List<ProjectExpense> projectExpenses=new ArrayList<>();
+  private List<ProjectExpense> projectExpenses = new ArrayList<>();
 
   public Project() {}
 
@@ -51,10 +51,9 @@ public class Project extends BaseEntity {
     this.location = location;
   }
 
-  public Project addProjectExpense(ProjectExpense tempProjectExpense) {
+  public void addProjectExpense(ProjectExpense tempProjectExpense) {
     projectExpenses.add(tempProjectExpense);
     tempProjectExpense.setProject(this);
-    return this;
   }
 
   public void deleteProjectExpense(ProjectExpense tempProjectExpense) {

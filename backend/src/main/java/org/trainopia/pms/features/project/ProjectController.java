@@ -2,26 +2,18 @@ package org.trainopia.pms.features.project;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.PositiveOrZero;
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.trainopia.pms.features.project.dto.CreateProjectDTO;
+import org.trainopia.pms.features.project.dto.UpsertProjectDTO;
 import org.trainopia.pms.features.project.dto.ProjectDTO;
 
 @RestController
 @RequestMapping("/projects")
 public class ProjectController {
 
-  ProjectService projectService;
+  private final ProjectService projectService;
 
-  @Autowired
   public ProjectController(ProjectService projectService) {
     this.projectService = projectService;
   }
@@ -42,15 +34,14 @@ public class ProjectController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Project createProject(@Valid @RequestBody CreateProjectDTO projectDTO) {
+  public Project createProject(@Valid @RequestBody UpsertProjectDTO projectDTO) {
     return projectService.create(projectDTO);
   }
 
-  // TODO make partial update
   @PutMapping("/{projectId}")
   public Project updateProject(
       @Valid @PositiveOrZero @PathVariable int projectId,
-      @RequestBody CreateProjectDTO projectDTO) {
+      @RequestBody UpsertProjectDTO projectDTO) {
     return projectService.update(projectId, projectDTO);
   }
 

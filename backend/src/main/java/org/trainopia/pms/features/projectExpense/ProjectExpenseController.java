@@ -5,7 +5,6 @@ import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.trainopia.pms.features.project.Project;
 import org.trainopia.pms.features.projectExpense.dto.ProjectExpenseDTO;
 
 @RestController

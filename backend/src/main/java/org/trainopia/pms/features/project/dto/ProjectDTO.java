@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Positive;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
-import org.trainopia.pms.features.project.Project;
 import org.trainopia.pms.features.projectDetails.ProjectDetails;
 import org.trainopia.pms.utility.BaseDTO;
 
@@ -49,18 +48,5 @@ public class ProjectDTO extends BaseDTO {
     this.location = location;
     this.projectDetails = projectDetails;
   }
-
-  public static ProjectDTO fromProject(Project project) {
-
-    return new ProjectDTO(
-        project.getId(),
-        project.getCreatedAt(),
-        project.getUpdatedAt(),
-        project.getTitle(),
-        project.getMinAge(),
-        project.getMaxAge(),
-        project.getPrice(),
-        project.getLocation(),
-        project.getProjectDetails());
-  }
+  
 }

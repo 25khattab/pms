@@ -1,20 +1,17 @@
 package org.trainopia.pms.features.project;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.trainopia.pms.features.project.dto.CreateProjectDTO;
+import org.trainopia.pms.features.project.dto.UpsertProjectDTO;
 import org.trainopia.pms.features.project.dto.ProjectDTO;
-
-import java.util.List;
 
 public interface ProjectService {
   Project findById(int id);
 
   Project findProxyById(int id);
 
-  Project create(CreateProjectDTO createProjectDTO);
+  Project create(UpsertProjectDTO upsertProjectDTO);
 
-  Project update(int projectId, CreateProjectDTO createProjectDTO);
+  Project update(int projectId, UpsertProjectDTO upsertProjectDTO);
 
   Page<ProjectDTO> findAll(int pageNo, int pageSize, String sortBy, String sortDirection);
 

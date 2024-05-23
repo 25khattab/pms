@@ -11,7 +11,7 @@ import org.trainopia.pms.features.projectDetails.dto.ProjectDetailsDTO;
 
 @Getter
 @Setter
-public class CreateProjectDTO {
+public class UpsertProjectDTO {
   @NotBlank(message = "title shouldn't be empty")
   private String title;
 
@@ -29,7 +29,7 @@ public class CreateProjectDTO {
 
   @Valid @NotNull private ProjectDetailsDTO projectDetails;
 
-  public CreateProjectDTO(
+  public UpsertProjectDTO(
       String title,
       int minAge,
       int maxAge,
