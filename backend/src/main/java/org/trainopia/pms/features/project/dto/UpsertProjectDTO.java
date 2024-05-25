@@ -29,6 +29,8 @@ public class UpsertProjectDTO {
 
   @Valid @NotNull private ProjectDetailsDTO projectDetails;
 
+  public UpsertProjectDTO() {}
+
   public UpsertProjectDTO(
       String title,
       int minAge,

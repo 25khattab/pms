@@ -7,9 +7,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.trainopia.pms.features.project.dao.ProjectDAO;
-import org.trainopia.pms.features.project.dto.UpsertProjectDTO;
 import org.trainopia.pms.features.project.dto.ProjectDTO;
+import org.trainopia.pms.features.project.dto.UpsertProjectDTO;
 import org.trainopia.pms.features.projectDetails.ProjectDetails;
 import org.trainopia.pms.features.projectExpense.ProjectExpenseRepository;
 import org.trainopia.pms.utility.AppException;
@@ -18,15 +17,11 @@ import org.trainopia.pms.utility.CommonError;
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
-  private final ProjectDAO projectDAO;
   private final ProjectRepository projectRepository;
   private final ProjectExpenseRepository projectExpenseRepository;
 
   public ProjectServiceImpl(
-      ProjectDAO projectDAO,
-      ProjectRepository projectRepository,
-      ProjectExpenseRepository projectExpenseRepository) {
-    this.projectDAO = projectDAO;
+      ProjectRepository projectRepository, ProjectExpenseRepository projectExpenseRepository) {
     this.projectRepository = projectRepository;
     this.projectExpenseRepository = projectExpenseRepository;
   }
@@ -91,7 +86,7 @@ public class ProjectServiceImpl implements ProjectService {
   public Page<ProjectDTO> findAll(int pageNo, int pageSize, String sortBy, String sortDirection) {
     Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
     Pageable paging = PageRequest.of(pageNo, pageSize, sort);
-    return projectDAO.findAll(paging);
+    return projectRepository.findAllProjects(paging);
   }
 
   @Override

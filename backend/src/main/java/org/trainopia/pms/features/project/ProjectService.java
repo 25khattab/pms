@@ -1,8 +1,8 @@
 package org.trainopia.pms.features.project;
 
 import org.springframework.data.domain.Page;
-import org.trainopia.pms.features.project.dto.UpsertProjectDTO;
 import org.trainopia.pms.features.project.dto.ProjectDTO;
+import org.trainopia.pms.features.project.dto.UpsertProjectDTO;
 
 public interface ProjectService {
   Project findById(int id);

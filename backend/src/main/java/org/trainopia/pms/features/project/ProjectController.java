@@ -5,8 +5,8 @@ import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.trainopia.pms.features.project.dto.UpsertProjectDTO;
 import org.trainopia.pms.features.project.dto.ProjectDTO;
+import org.trainopia.pms.features.project.dto.UpsertProjectDTO;
 
 @RestController
 @RequestMapping("/projects")
@@ -50,4 +50,6 @@ public class ProjectController {
   public void deleteProject(@Valid @PositiveOrZero @PathVariable int projectId) {
     projectService.deleteById(projectId);
   }
+
+  // TODO create multiDelete
 }

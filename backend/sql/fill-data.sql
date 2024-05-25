@@ -1,5 +1,10 @@
 DELIMITER $$
 
+-- Drop the procedures if they already exist
+DROP PROCEDURE IF EXISTS GenerateProjectDetails $$
+DROP PROCEDURE IF EXISTS GenerateProjects $$
+DROP PROCEDURE IF EXISTS GenerateProjectExpenses $$
+
 CREATE PROCEDURE GenerateProjectDetails()
 BEGIN
     DECLARE i INT DEFAULT 1;
@@ -7,7 +12,7 @@ BEGIN
     DECLARE images_folder_url VARCHAR(100);
     DECLARE deleted BOOLEAN;
 
-    WHILE i <= 100000
+    WHILE i <= 1000
         DO
             SET description = CONCAT('Project ', i);
             SET images_folder_url = CONCAT('/images/project_', i);
@@ -29,7 +34,7 @@ BEGIN
     DECLARE location VARCHAR(100);
     DECLARE project_details_id INT;
 
-    WHILE i <= 100000
+    WHILE i <= 1000
         DO
             SET title = CONCAT('Project ', i);
             SET min_age = FLOOR(RAND() * 80) + 10; -- Random age between 10 and 90
@@ -53,11 +58,11 @@ BEGIN
     DECLARE project_id INT;
     DECLARE deleted BOOLEAN;
 
-    WHILE i <= 100000
+    WHILE i <= 1000
         DO
             SET name = CONCAT('Expense ', i);
             SET price = ROUND(RAND() * 90 + 10, 2); -- Random price between 10 and 100
-            SET project_id = FLOOR(RAND() * 100000) + 1; -- Random project_id between 1 and 100,000
+            SET project_id = FLOOR(RAND() * 1000) + 1; -- Random project_id between 1 and 100,000
             SET deleted = FLOOR(RAND() * 2); -- Randomly set deleted to true or false
 
             INSERT INTO `project_expense` (`name`, `price`, `project_id`)

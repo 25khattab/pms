@@ -7,12 +7,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.trainopia.pms.features.project.dto.ProjectDTO;
 
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
-  @Override
-  @Query("select p from Project p join fetch p.projectDetails ")
-  Page<Project> findAll(Pageable pageable);
-  
+
+  @Query(
+      "SELECT NEW org.trainopia.pms.features.project.dto."
+          + "ProjectDTO(p.id, p.createdAt, p.updatedAt, p.title, p.minAge, p.maxAge, p.price, p.location, p.projectDetails)"
+          + " FROM Project p")
+  Page<ProjectDTO> findAllProjects(Pageable pageable);
+
   @Override
   @Query(
       "FROM Project p "
@@ -23,4 +27,9 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
   @Modifying
   @Query("DELETE FROM Project p WHERE p.id = :projectId")
   int deleteProjectById(@Param("projectId") Integer projectId);
+
+  @Override
+  @Modifying
+  @Query("DELETE FROM Project")
+  void deleteAll();
 }

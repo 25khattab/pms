@@ -48,5 +48,4 @@ public class ProjectDTO extends BaseDTO {
     this.location = location;
     this.projectDetails = projectDetails;
   }
-  
 }

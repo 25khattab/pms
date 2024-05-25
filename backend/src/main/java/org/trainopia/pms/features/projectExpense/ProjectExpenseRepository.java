@@ -14,4 +14,9 @@ public interface ProjectExpenseRepository extends JpaRepository<ProjectExpense, 
   @Modifying
   @Query("DELETE FROM ProjectExpense c WHERE c.project.id = :projectId")
   void deleteAllByProjectId(@Param("projectId") int projectId);
+
+  @Modifying
+  @Override
+  @Query("DELETE FROM ProjectExpense")
+  void deleteAll();
 }
