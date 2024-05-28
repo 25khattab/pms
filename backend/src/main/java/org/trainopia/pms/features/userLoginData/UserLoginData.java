@@ -1,55 +1,47 @@
 package org.trainopia.pms.features.userLoginData;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import org.trainopia.pms.features.user.User;
 import org.trainopia.pms.utility.BaseEntity;
 
 @Entity
+@Setter
+@Getter
 @Table(name = "user_login_data")
 public class UserLoginData extends BaseEntity {
-  @Column(name = "user_name")
-  private String userName;
 
-  @Column(name = "email")
-  private String email;
+    @Column(name = "user_name")
+    private String username;
 
-  @Column(name = "password")
-  @JsonIgnore
-  private String password;
+    @Column(name = "email")
+    private String email;
 
-  @OneToOne(mappedBy = "userLoginData", fetch = FetchType.LAZY)
-  private User user;
+    @Column(name = "password")
+    @JsonIgnore
+    private String password;
 
-  public UserLoginData() {}
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    private User user;
 
-  public UserLoginData(String userName, String email, String password) {
-    this.userName = userName;
-    this.email = email;
-    this.password = password;
-  }
+    public UserLoginData() {}
 
-  public String getUserName() {
-    return userName;
-  }
+    public UserLoginData(String username, String email, String password, User user) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.user = user;
+    }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
 }

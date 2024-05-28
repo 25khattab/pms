@@ -1,9 +1,13 @@
 package org.trainopia.pms.features.user;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.trainopia.pms.features.userLoginData.UserLoginData;
 import org.trainopia.pms.utility.BaseEntity;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity {
@@ -17,8 +21,7 @@ public class User extends BaseEntity {
   @Enumerated(EnumType.STRING)
   private UserRole role = UserRole.VOLUNTEER;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "user_login_data_id")
+  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private UserLoginData userLoginData;
 
   public User() {}
@@ -29,35 +32,4 @@ public class User extends BaseEntity {
     this.role = role;
   }
 
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public UserRole getRole() {
-    return role;
-  }
-
-  public void setRole(UserRole role) {
-    this.role = role;
-  }
-
-  public UserLoginData getUserLoginData() {
-    return userLoginData;
-  }
-
-  public void setUserLoginData(UserLoginData userLoginData) {
-    this.userLoginData = userLoginData;
-  }
 }

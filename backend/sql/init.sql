@@ -13,6 +13,7 @@ Drop table if exists `client`;
 Drop table if exists `team`;
 Drop table if exists `user`;
 Drop table if exists `user_login_data`;
+Drop table if exists `external_user_login_data`;
 Drop table if exists `volunteer`;
 Drop table if exists `volunteer_team`;
 Drop table if exists `project_details`;
@@ -73,7 +74,16 @@ CREATE TABLE `client`
     PRIMARY KEY (`id`)
 );
 
-
+CREATE TABLE `user`
+(
+    `id`                 INT                                                             NOT NULL AUTO_INCREMENT,
+    `first_name`         varchar(100)                                                    NOT NULL,
+    `last_name`          varchar(100)                                                    NOT NULL,
+    `role`               varchar(100)                                                    NOT NUll,
+    `created_at`         TIMESTAMP DEFAULT CURRENT_TIMESTAMP                             NOT NULL,
+    `updated_at`         TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY (`id`)
+);
 
 CREATE TABLE `user_login_data`
 (
@@ -83,22 +93,22 @@ CREATE TABLE `user_login_data`
     `password`   varchar(256)                                                    NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP                             NOT NULL,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
-    PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `user`
-(
-    `id`                 INT                                                             NOT NULL AUTO_INCREMENT,
-    `first_name`         varchar(100)                                                    NOT NULL,
-    `last_name`          varchar(100)                                                    NOT NULL,
-    `role`               varchar(100)                                                    NOT NUll,
-    `created_at`         TIMESTAMP DEFAULT CURRENT_TIMESTAMP                             NOT NULL,
-    `updated_at`         TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
-    `user_login_data_id` INT                                                             NOT NULL,
+    `user_id`    INT                                                             NOT NULL UNIQUE,
     PRIMARY KEY (`id`),
-    CONSTRAINT `user_fk0` FOREIGN KEY (`user_login_data_id`) REFERENCES `user_login_data` (`id`)
+    CONSTRAINT `user_login_data_fk0` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 );
 
+CREATE TABLE `external_user_login_data`
+(
+    `id`         INT                                                             NOT NULL AUTO_INCREMENT,
+    `email`      varchar(100)                                                    NOT NULL UNIQUE,
+    `provider`   varchar(100)                                                    NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP                             NOT NULL,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    `user_id`    INT                                                             NOT NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `external_user_login_data_fk0` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+);
 CREATE TABLE `volunteer`
 (
     `id`         INT                                                             NOT NULL AUTO_INCREMENT,

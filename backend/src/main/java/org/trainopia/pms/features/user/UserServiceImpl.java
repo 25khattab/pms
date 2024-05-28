@@ -1,78 +1,56 @@
 package org.trainopia.pms.features.user;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.trainopia.pms.features.user.dao.UserDAO;
-import org.trainopia.pms.features.user.dto.CreateUserDTO;
+import org.springframework.transaction.annotation.Transactional;
+import org.trainopia.pms.features.user.dto.UpsertUserDTO;
 import org.trainopia.pms.features.userLoginData.UserLoginData;
+import org.trainopia.pms.features.userLoginData.UserLoginDataRepository;
 import org.trainopia.pms.utility.AppException;
 import org.trainopia.pms.utility.CommonError;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-  UserDAO userDAO;
-  BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserRepository userRepository;
+    private final UserLoginDataRepository userLoginDataRepository;
+    PasswordEncoder bCryptPasswordEncoder;
 
-  @Autowired
-  public UserServiceImpl(UserDAO userDAO, BCryptPasswordEncoder bCryptPasswordEncoder) {
-    this.userDAO = userDAO;
-    this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-  }
-
-  @Override
-  public List<User> findAll() {
-    List<User> result = userDAO.findAll();
-    return result;
-  }
-
-  @Override
-  public User findById() {
-    return null;
-  }
-
-  @Override
-  public User create(CreateUserDTO createUserDTO) {
-    User existingUser =
-        userDAO.findByEmailOrUserName(createUserDTO.email(), createUserDTO.userName()).orElse(null);
-    if (existingUser != null) {
-      throw new AppException(
-          "create",
-          this.getClass().getSimpleName(),
-          "User Exist",
-          CommonError.USER_EXISTS,
-          HttpStatus.BAD_REQUEST);
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, UserLoginDataRepository userLoginDataRepository,
+                           PasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.userLoginDataRepository = userLoginDataRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
-    User newUser =
-        new User(createUserDTO.firstName(), createUserDTO.lastName(), UserRole.VOLUNTEER);
-    String encryptedPassword = bCryptPasswordEncoder.encode(createUserDTO.password());
-    UserLoginData userLoginData =
-        new UserLoginData(createUserDTO.userName(), createUserDTO.email(), encryptedPassword);
-    newUser.setUserLoginData(userLoginData);
-    userDAO.save(newUser);
-    return newUser;
-  }
 
-  @Override
-  public Boolean getExistEmail(String email) {
-    return null;
-  }
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 
-  //    @Override
-  //    public List<User> findAllWithLoginData() {
-  //        return userRepository.findAllWithLoginData();
-  //    }
-  //
-  //    @Override
-  //    public UserDTO findById() {
-  //        return null;
-  //    }
-  //
-  //    @Override
-  //    public User findByIdWithLoginData() {
-  //        return null;
-  //    }
+    @Override
+    public User findById() {
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public User create(UpsertUserDTO upsertUserDTO) {
+        userRepository.findByEmailOrUserName(upsertUserDTO.getEmail(), upsertUserDTO.getUsername()).ifPresent(user -> {
+            throw new AppException("create", this.getClass().getSimpleName(), "email and username must be unique", CommonError.USER_EXISTS, HttpStatus.BAD_REQUEST);
+        });
+        User newUser = new User(upsertUserDTO.getFirstName(), upsertUserDTO.getLastName(), UserRole.VOLUNTEER);
+        String encryptedPassword = bCryptPasswordEncoder.encode(upsertUserDTO.getPassword());
+        userRepository.save(newUser);
+        UserLoginData userLoginData = new UserLoginData(upsertUserDTO.getUsername(), upsertUserDTO.getEmail(), encryptedPassword, newUser);
+        userLoginDataRepository.save(userLoginData);
+        newUser.setUserLoginData(userLoginData);
+        return newUser;
+    }
+
 }
