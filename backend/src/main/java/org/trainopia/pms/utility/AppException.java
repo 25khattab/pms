@@ -1,11 +1,12 @@
 package org.trainopia.pms.utility;
 
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
+
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 
 @Setter
 @Getter
@@ -38,11 +39,11 @@ public class AppException extends RuntimeException {
     @Override
     public String toString() {
         return "AppException{" +
-                "functionName='" + functionName + '\'' +
-                ", className='" + className + '\'' +
-                ", status=" + status +
-                ", timeStamp=" + timeStamp +
-                ", errors=" + errors +
-                '}';
+               "functionName='" + functionName + '\'' +
+               ", className='" + className + '\'' +
+               ", status=" + status +
+               ", timeStamp=" + timeStamp +
+               ", errors=" + errors +
+               '}';
     }
 }

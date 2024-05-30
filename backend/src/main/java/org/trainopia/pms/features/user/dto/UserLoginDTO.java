@@ -12,11 +12,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserLoginDTO {
-  @NotNull(message = "username shouldn't be null")
-  @NotEmpty(message = "username shouldn't be empty")
-  private String username;
+    @NotNull(message = "username shouldn't be null")
+    @NotEmpty(message = "username shouldn't be empty")
+    private String username;
 
-  @NotNull(message = "password shouldn't be null")
-  @NotEmpty(message = "password shouldn't be empty")
-  private String password;
+    @NotNull(message = "password shouldn't be null")
+    @NotEmpty(message = "password shouldn't be empty")
+    private String password;
 }

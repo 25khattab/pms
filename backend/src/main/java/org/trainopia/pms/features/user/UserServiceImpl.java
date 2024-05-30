@@ -42,7 +42,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User create(UpsertUserDTO upsertUserDTO) {
         userRepository.findByEmailOrUserName(upsertUserDTO.getEmail(), upsertUserDTO.getUsername()).ifPresent(user -> {
-            throw new AppException("create", this.getClass().getSimpleName(), "email and username must be unique", CommonError.USER_EXISTS, HttpStatus.BAD_REQUEST);
+            throw new AppException("create", this.getClass().getSimpleName(), "email and username must be unique", CommonError.USER_EXISTS,
+                                   HttpStatus.BAD_REQUEST);
         });
         User newUser = new User(upsertUserDTO.getFirstName(), upsertUserDTO.getLastName(), UserRole.VOLUNTEER);
         String encryptedPassword = bCryptPasswordEncoder.encode(upsertUserDTO.getPassword());

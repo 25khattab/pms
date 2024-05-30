@@ -13,25 +13,25 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpsertUserDTO {
-  @NotNull(message = "firstName shouldn't be null")
-  @NotEmpty(message = "firstName shouldn't be empty")
-  String firstName;
+    @NotNull(message = "firstName shouldn't be null")
+    @NotEmpty(message = "firstName shouldn't be empty")
+    String firstName;
 
-  @NotNull(message = "lastName shouldn't be null")
-  @NotEmpty(message = "lastName shouldn't be empty")
-  String lastName;
+    @NotNull(message = "lastName shouldn't be null")
+    @NotEmpty(message = "lastName shouldn't be empty")
+    String lastName;
 
-  @NotNull(message = "email shouldn't be null")
-  @NotEmpty(message = "email shouldn't be empty")
-  @Email
-  String email;
+    @NotNull(message = "email shouldn't be null")
+    @NotEmpty(message = "email shouldn't be empty")
+    @Email
+    String email;
 
-  @NotNull(message = "username shouldn't be null")
-  @NotEmpty(message = "username shouldn't be empty")
-  String username;
+    @NotNull(message = "username shouldn't be null")
+    @NotEmpty(message = "username shouldn't be empty")
+    String username;
 
-  @NotNull(message = "password shouldn't be null")
-  @NotEmpty(message = "password shouldn't be empty")
-  // TODO add more constraints on password
-  String password;
+    @NotNull(message = "password shouldn't be null")
+    @NotEmpty(message = "password shouldn't be empty")
+    // TODO add more constraints on password
+    String password;
 }

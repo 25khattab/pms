@@ -13,28 +13,28 @@ import org.trainopia.pms.utility.BaseEntity;
 @Setter
 public class ProjectDetails extends BaseEntity {
 
-  @Column(name = "description")
-  private String description;
+    @Column(name = "description")
+    private String description;
 
-  @Column(name = "images_folder_url")
-  private String imagesFolderURL;
+    @Column(name = "images_folder_url")
+    private String imagesFolderURL;
 
-  public ProjectDetails() {}
+    public ProjectDetails() {}
 
-  public ProjectDetails(String description, String imgFolderURL) {
-    this.description = description;
-    this.imagesFolderURL = imgFolderURL;
-  }
+    public ProjectDetails(String description, String imgFolderURL) {
+        this.description = description;
+        this.imagesFolderURL = imgFolderURL;
+    }
 
-  @Override
-  public String toString() {
-    return "ProjectDetails{"
-        + "description='"
-        + description
-        + '\''
-        + ", imgFolderUrl='"
-        + imagesFolderURL
-        + '\''
-        + '}';
-  }
+    @Override
+    public String toString() {
+        return "ProjectDetails{"
+               + "description='"
+               + description
+               + '\''
+               + ", imgFolderUrl='"
+               + imagesFolderURL
+               + '\''
+               + '}';
+    }
 }

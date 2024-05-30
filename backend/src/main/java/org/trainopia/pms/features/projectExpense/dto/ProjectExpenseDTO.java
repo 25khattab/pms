@@ -11,7 +11,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ProjectExpenseDTO {
 
-  @NotBlank() private String name;
+    @NotBlank()
+    private String name;
 
-  @Positive private int price;
+    @Positive
+    private int price;
 }

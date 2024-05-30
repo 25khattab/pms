@@ -8,14 +8,14 @@ import lombok.Setter;
 @Getter
 public class ProjectDetailsDTO {
 
-  @NotBlank(message = "description mustn't be empty")
-  private String description;
+    @NotBlank(message = "description mustn't be empty")
+    private String description;
 
-  @NotBlank(message = "imagesFolderURL mustn't be empty")
-  private String imagesFolderURL;
+    @NotBlank(message = "imagesFolderURL mustn't be empty")
+    private String imagesFolderURL;
 
-  public ProjectDetailsDTO(String description, String imagesFolderURL) {
-    this.description = description;
-    this.imagesFolderURL = imagesFolderURL;
-  }
+    public ProjectDetailsDTO(String description, String imagesFolderURL) {
+        this.description = description;
+        this.imagesFolderURL = imagesFolderURL;
+    }
 }
