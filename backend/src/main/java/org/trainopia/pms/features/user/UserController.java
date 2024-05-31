@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.trainopia.pms.features.user.dto.UpsertUserDTO;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/v1/users")
 public class UserController {
     private final UserService userService;
 

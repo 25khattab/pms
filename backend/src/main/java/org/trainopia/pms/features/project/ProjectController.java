@@ -18,7 +18,7 @@ import org.trainopia.pms.features.project.dto.ProjectDTO;
 import org.trainopia.pms.features.project.dto.UpsertProjectDTO;
 
 @RestController
-@RequestMapping("/projects")
+@RequestMapping("/api/v1/projects")
 public class ProjectController {
 
     private final ProjectService projectService;

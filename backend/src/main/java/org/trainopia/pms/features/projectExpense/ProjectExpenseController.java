@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.trainopia.pms.features.projectExpense.dto.ProjectExpenseDTO;
 
 @RestController
-@RequestMapping("/projects/{projectId}/expenses")
+@RequestMapping("/api/v1/projects/{projectId}/expenses")
 public class ProjectExpenseController {
 
     ProjectExpenseService projectExpenseService;

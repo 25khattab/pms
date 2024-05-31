@@ -12,7 +12,7 @@ import org.trainopia.pms.features.user.dto.UpsertUserDTO;
 import org.trainopia.pms.features.user.dto.UserLoginDTO;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
     private final AuthService authService;
