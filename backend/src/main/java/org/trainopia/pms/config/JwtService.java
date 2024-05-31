@@ -1,4 +1,4 @@
-package org.trainopia.pms.features.config;
+package org.trainopia.pms.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

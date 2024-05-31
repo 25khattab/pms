@@ -5,8 +5,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.trainopia.pms.config.JwtService;
 import org.trainopia.pms.features.auth.dto.AuthenticationResponse;
-import org.trainopia.pms.features.config.JwtService;
 import org.trainopia.pms.features.user.User;
 import org.trainopia.pms.features.user.UserService;
 import org.trainopia.pms.features.user.dto.UpsertUserDTO;
