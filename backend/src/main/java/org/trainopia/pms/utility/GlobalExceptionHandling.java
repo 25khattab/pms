@@ -8,13 +8,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.ServletWebRequest;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,6 +48,20 @@ public class GlobalExceptionHandling {
         ApiError apiError = new ApiError("Authentication Failed Check Errors for more info", Collections.singletonList(ex.getLocalizedMessage()),
                                          HttpStatus.FORBIDDEN.value());
         logger.error("Authentication Failed Check Errors for more info", ex);
+        return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
+    @ExceptionHandler({ AuthorizationDeniedException.class })
+    public ResponseEntity<?> handleAuthorizationDeniedException(AuthorizationDeniedException ex, WebRequest request) {
+        List<Object> errors = new ArrayList<>();
+        Principal principal = request.getUserPrincipal();
+        errors.add(ex.getLocalizedMessage());
+        if (principal != null) {
+            errors.add(principal.getName() + " doesn't have access to " + ((ServletWebRequest) request).getRequest().getRequestURI());
+        }
+
+        ApiError apiError = new ApiError("Authorization Denied Check Errors for more info", errors, HttpStatus.UNAUTHORIZED.value());
+        logger.error("Authorization Failed Check Errors for more info", ex);
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 

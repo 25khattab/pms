@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.trainopia.pms.features.auth.accessRoles.IsManager;
+import org.trainopia.pms.features.auth.accessRoles.IsProjectManager;
+import org.trainopia.pms.features.auth.accessRoles.IsVolunteer;
 import org.trainopia.pms.features.project.dto.ProjectDTO;
 import org.trainopia.pms.features.project.dto.UpsertProjectDTO;
 
 @RestController
 @RequestMapping("/api/v1/projects")
+@IsProjectManager
 public class ProjectController {
 
     private final ProjectService projectService;
@@ -28,6 +32,7 @@ public class ProjectController {
     }
 
     @GetMapping
+    @IsVolunteer
     public Page<ProjectDTO> getAllProjects(
         @RequestParam(defaultValue = "0") int pageNo,
         @RequestParam(defaultValue = "10") int pageSize,
@@ -55,6 +60,7 @@ public class ProjectController {
     }
 
     @DeleteMapping("/{projectId}")
+    @IsManager
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProject(@Valid @PositiveOrZero @PathVariable int projectId) {
         projectService.deleteById(projectId);

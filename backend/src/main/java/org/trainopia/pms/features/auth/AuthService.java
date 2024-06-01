@@ -39,5 +39,4 @@ public class AuthService {
         String jwtToken = jwtService.generateToken(userDetails);
         return AuthenticationResponse.builder().accessToken(jwtToken).build();
     }
-
 }

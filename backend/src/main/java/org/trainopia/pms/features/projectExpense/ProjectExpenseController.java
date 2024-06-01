@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.trainopia.pms.features.auth.accessRoles.IsProjectManager;
 import org.trainopia.pms.features.projectExpense.dto.ProjectExpenseDTO;
 
 @RestController
 @RequestMapping("/api/v1/projects/{projectId}/expenses")
+@IsProjectManager
 public class ProjectExpenseController {
 
     ProjectExpenseService projectExpenseService;

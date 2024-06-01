@@ -9,6 +9,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.trainopia.pms.features.auth.AuthUserDetails;
 import org.trainopia.pms.features.user.UserRepository;
 
@@ -39,5 +40,10 @@ public class ApplicationConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public MethodValidationPostProcessor methodValidationPostProcessor() {
+        return new MethodValidationPostProcessor();
     }
 }
