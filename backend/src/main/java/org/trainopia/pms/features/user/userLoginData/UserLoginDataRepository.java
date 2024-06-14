@@ -1,4 +1,4 @@
-package org.trainopia.pms.features.userLoginData;
+package org.trainopia.pms.features.user.userLoginData;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

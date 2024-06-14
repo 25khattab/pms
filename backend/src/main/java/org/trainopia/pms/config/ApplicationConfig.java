@@ -14,6 +14,7 @@ import org.trainopia.pms.features.auth.AuthUserDetails;
 import org.trainopia.pms.features.user.UserRepository;
 
 @Configuration
+//@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)
 public class ApplicationConfig {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -25,7 +26,7 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userRepository.findByEmailOrUserName("", username).map(AuthUserDetails::new).orElseThrow(
+        return username -> userRepository.findByEmail(username).map(AuthUserDetails::new).orElseThrow(
             () -> new BadCredentialsException("Bad Credentials"));
     }
 

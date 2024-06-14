@@ -12,9 +12,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.trainopia.pms.features.auth.CustomOAuth2UserService;
 import org.trainopia.pms.features.user.UserRole;
 
 @Configuration
@@ -23,16 +24,22 @@ import org.trainopia.pms.features.user.UserRole;
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final AuthenticationEntryPoint authenticationEntryPoint;
+    private final DelegateAuthenticationEntryPoint delegateAuthenticationEntryPoint;
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, AuthenticationEntryPoint authenticationEntryPoint) {
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter,
+                          DelegateAuthenticationEntryPoint delegateAuthenticationEntryPoint,
+                          AuthenticationSuccessHandler authenticationSuccessHandler) {
+
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-        this.authenticationEntryPoint = authenticationEntryPoint;
+        this.delegateAuthenticationEntryPoint = delegateAuthenticationEntryPoint;
+        this.authenticationSuccessHandler = authenticationSuccessHandler;
     }
 
     @Bean
     static RoleHierarchy roleHierarchy() {
-        return RoleHierarchyImpl.withRolePrefix("").role(UserRole.MANAGER.name()).implies(UserRole.PROJECT_MANAGER.name())
+        return RoleHierarchyImpl.withRolePrefix("")
+                                .role(UserRole.MANAGER.name()).implies(UserRole.PROJECT_MANAGER.name())
                                 .role(UserRole.PROJECT_MANAGER.name()).implies(UserRole.VOLUNTEER.name()).build();
     }
 
@@ -51,11 +58,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(
-                authorize -> authorize.requestMatchers("/error").permitAll().requestMatchers("/api/v1/auth/**").permitAll().anyRequest().authenticated())
+        http.csrf(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests(authorize -> authorize.requestMatchers("/",
+                                                                          "/css/*",
+                                                                          "/error",
+                                                                          "/favicon.ico").permitAll()
+                                                         .requestMatchers("/api/v1/auth/**").permitAll()
+                                                         .anyRequest().authenticated())
+            .oauth2Login(l -> l.successHandler(authenticationSuccessHandler).userInfoEndpoint(ui -> ui.userService(new CustomOAuth2UserService())))
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-            .exceptionHandling(exc -> exc.authenticationEntryPoint(authenticationEntryPoint));
+            .exceptionHandling(exc -> exc.authenticationEntryPoint(delegateAuthenticationEntryPoint));
         return http.build();
     }
+
 }
+
+

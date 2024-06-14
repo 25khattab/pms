@@ -1,4 +1,4 @@
-package org.trainopia.pms.features.userLoginData;
+package org.trainopia.pms.features.user.userLoginData;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
@@ -19,9 +19,6 @@ import org.trainopia.pms.utility.BaseEntity;
 @Table(name = "user_login_data")
 public class UserLoginData extends BaseEntity {
 
-    @Column(name = "user_name")
-    private String username;
-
     @Column(name = "email")
     private String email;
 
@@ -37,8 +34,7 @@ public class UserLoginData extends BaseEntity {
 
     public UserLoginData() {}
 
-    public UserLoginData(String username, String email, String password, User user) {
-        this.username = username;
+    public UserLoginData(String email, String password, User user) {
         this.email = email;
         this.password = password;
         this.user = user;

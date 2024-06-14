@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    @Query("select u from User u join fetch u.userLoginData" +
-           " where u.userLoginData.email=:email or u.userLoginData.username=:userName")
-    Optional<User> findByEmailOrUserName(String email, String userName);
+    @Query("select u from User u left join fetch u.userLoginData uld left join fetch u.externalUsersLoginData euld" +
+           " where uld.email=:email or euld.email=:email")
+    Optional<User> findByEmail(String email);
 }

@@ -27,16 +27,16 @@ public class AuthService {
 
     public AuthenticationResponse login(UserLoginDTO request) {
         Authentication authenticate = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+            new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         String jwtToken = jwtService.generateToken((AuthUserDetails) authenticate.getPrincipal());
         return AuthenticationResponse.builder().accessToken(jwtToken).build();
     }
 
     public AuthenticationResponse signUp(UpsertUserDTO upsertUserDTO) {
         User createdUser = userService.create(upsertUserDTO);
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(upsertUserDTO.getUsername(), upsertUserDTO.getPassword()));
         UserDetails userDetails = new AuthUserDetails(createdUser);
         String jwtToken = jwtService.generateToken(userDetails);
         return AuthenticationResponse.builder().accessToken(jwtToken).build();
     }
+
 }

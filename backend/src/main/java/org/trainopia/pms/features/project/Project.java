@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.trainopia.pms.features.projectDetails.ProjectDetails;
@@ -47,6 +48,7 @@ public class Project extends BaseEntity {
         fetch = FetchType.LAZY,
         orphanRemoval = true, // to remove the entity entirely when setting project null
         cascade = { CascadeType.ALL })
+    @Setter(AccessLevel.NONE)
     private List<ProjectExpense> projectExpenses = new ArrayList<>();
 
     public Project() {}

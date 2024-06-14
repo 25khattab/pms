@@ -1,6 +1,5 @@
 package org.trainopia.pms.utility;
 
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +45,7 @@ public class GlobalExceptionHandling {
     @ExceptionHandler({ AuthenticationException.class })
     public ResponseEntity<?> handleAuthenticationException(AuthenticationException ex) {
         ApiError apiError = new ApiError("Authentication Failed Check Errors for more info", Collections.singletonList(ex.getLocalizedMessage()),
-                                         HttpStatus.FORBIDDEN.value());
+                                         HttpStatus.UNAUTHORIZED.value());
         logger.error("Authentication Failed Check Errors for more info", ex);
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
@@ -60,7 +59,7 @@ public class GlobalExceptionHandling {
             errors.add(principal.getName() + " doesn't have access to " + ((ServletWebRequest) request).getRequest().getRequestURI());
         }
 
-        ApiError apiError = new ApiError("Authorization Denied Check Errors for more info", errors, HttpStatus.UNAUTHORIZED.value());
+        ApiError apiError = new ApiError("Authorization Denied Check Errors for more info", errors, HttpStatus.FORBIDDEN.value());
         logger.error("Authorization Failed Check Errors for more info", ex);
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
@@ -91,11 +90,6 @@ public class GlobalExceptionHandling {
             });
             apiError = new ApiError("Validation Failed Check Errors for more info", errors, HttpStatus.BAD_REQUEST.value());
             logger.error("Validation Failed Check Errors for more info", ex);
-        } else if (ex instanceof ExpiredJwtException exception) {
-            List<Object> errors = new ArrayList<>();
-            errors.add(exception.getLocalizedMessage());
-            apiError = new ApiError("Expired JWT Token", errors, HttpStatus.FORBIDDEN.value());
-            logger.error("Expired JWT Token", ex);
         } else {
             apiError = new ApiError(ex.getLocalizedMessage(), CommonError.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR.value());
             logger.error(ex.getLocalizedMessage(), ex);

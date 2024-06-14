@@ -76,19 +76,20 @@ CREATE TABLE `client`
 
 CREATE TABLE `user`
 (
-    `id`                 INT                                                             NOT NULL AUTO_INCREMENT,
-    `first_name`         varchar(100)                                                    NOT NULL,
-    `last_name`          varchar(100)                                                    NOT NULL,
-    `role`               varchar(100)                                                    NOT NUll,
-    `created_at`         TIMESTAMP DEFAULT CURRENT_TIMESTAMP                             NOT NULL,
-    `updated_at`         TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    `id`         INT                                                             NOT NULL AUTO_INCREMENT,
+    `first_name` varchar(100)                                                    NOT NULL,
+    `last_name`  varchar(100)                                                    NOT NULL,
+    `role`       varchar(100)                                                    NOT NUll,
+    `verified`   BOOLEAN   DEFAULT FALSE                                         NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP                             NOT NULL,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+
     PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `user_login_data`
 (
     `id`         INT                                                             NOT NULL AUTO_INCREMENT,
-    `user_name`  varchar(100)                                                    NOT NULL UNIQUE,
     `email`      varchar(100)                                                    NOT NULL UNIQUE,
     `password`   varchar(256)                                                    NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP                             NOT NULL,
@@ -100,12 +101,12 @@ CREATE TABLE `user_login_data`
 
 CREATE TABLE `external_user_login_data`
 (
-    `id`         INT                                                             NOT NULL AUTO_INCREMENT,
-    `email`      varchar(100)                                                    NOT NULL UNIQUE,
-    `provider`   varchar(100)                                                    NOT NULL,
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP                             NOT NULL,
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
-    `user_id`    INT                                                             NOT NULL,
+    `id`             INT                                                             NOT NULL AUTO_INCREMENT,
+    `email`          varchar(100)                                                    NOT NULL UNIQUE,
+    `OAuth2Provider` varchar(100)                                                    NOT NULL,
+    `created_at`     TIMESTAMP DEFAULT CURRENT_TIMESTAMP                             NOT NULL,
+    `updated_at`     TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    `user_id`        INT                                                             NOT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `external_user_login_data_fk0` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 );

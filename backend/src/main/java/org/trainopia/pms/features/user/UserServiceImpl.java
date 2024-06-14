@@ -1,30 +1,36 @@
 package org.trainopia.pms.features.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.trainopia.pms.features.auth.oAuth2.user.OAuth2UserInfo;
 import org.trainopia.pms.features.user.dto.UpsertUserDTO;
-import org.trainopia.pms.features.userLoginData.UserLoginData;
-import org.trainopia.pms.features.userLoginData.UserLoginDataRepository;
+import org.trainopia.pms.features.user.externalUserLoginData.ExternalUserLoginData;
+import org.trainopia.pms.features.user.externalUserLoginData.ExternalUserLoginDataRepository;
+import org.trainopia.pms.features.user.userLoginData.UserLoginData;
+import org.trainopia.pms.features.user.userLoginData.UserLoginDataRepository;
 import org.trainopia.pms.utility.AppException;
 import org.trainopia.pms.utility.CommonError;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserLoginDataRepository userLoginDataRepository;
-    PasswordEncoder bCryptPasswordEncoder;
+    private final ExternalUserLoginDataRepository externalUserLoginDataRepository;
+    private final PasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
     public UserServiceImpl(UserRepository userRepository, UserLoginDataRepository userLoginDataRepository,
+                           ExternalUserLoginDataRepository externalUserLoginDataRepository,
                            PasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.userLoginDataRepository = userLoginDataRepository;
+        this.externalUserLoginDataRepository = externalUserLoginDataRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -41,17 +47,43 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User create(UpsertUserDTO upsertUserDTO) {
-        userRepository.findByEmailOrUserName(upsertUserDTO.getEmail(), upsertUserDTO.getUsername()).ifPresent(user -> {
-            throw new AppException("create", this.getClass().getSimpleName(), "email and username must be unique", CommonError.USER_EXISTS,
+        userRepository.findByEmail(upsertUserDTO.getEmail()).ifPresent(user -> {
+            throw new AppException("create", this.getClass().getSimpleName(), "email must be unique", CommonError.USER_EXISTS,
                                    HttpStatus.BAD_REQUEST);
         });
         User newUser = new User(upsertUserDTO.getFirstName(), upsertUserDTO.getLastName(), UserRole.VOLUNTEER);
         String encryptedPassword = bCryptPasswordEncoder.encode(upsertUserDTO.getPassword());
         userRepository.save(newUser);
-        UserLoginData userLoginData = new UserLoginData(upsertUserDTO.getUsername(), upsertUserDTO.getEmail(), encryptedPassword, newUser);
+        UserLoginData userLoginData = new UserLoginData(upsertUserDTO.getEmail(), encryptedPassword, newUser);
         userLoginDataRepository.save(userLoginData);
         newUser.setUserLoginData(userLoginData);
         return newUser;
+    }
+
+    @Override
+    @Transactional
+    public User linkOrCreateFromProvider(@NonNull OAuth2UserInfo oAuth2UserInfo) {
+        // we check if a user exist with the provided email
+        User user = userRepository.findByEmail(oAuth2UserInfo.getEmail()).orElse(null);
+        if (user != null) {
+            // if user exists we then check if the provider is unique or already exist
+            Optional<ExternalUserLoginData> existingUserWithSameProvider = user.getExternalUsersLoginData().stream().filter(
+                externalData -> externalData.getProvider() == oAuth2UserInfo.getProvider()).findFirst();
+            if (existingUserWithSameProvider.isEmpty()) {
+                ExternalUserLoginData externalUserLoginData = new ExternalUserLoginData(oAuth2UserInfo.getEmail(), oAuth2UserInfo.getProvider(),
+                                                                                        user);
+                user.addExternalUsersLoginData(externalUserLoginData);
+            }
+            return user;
+        } else {
+            User newUser = new User(oAuth2UserInfo.getFirstName(), oAuth2UserInfo.getLastName(), UserRole.VOLUNTEER);
+            userRepository.save(newUser);
+            ExternalUserLoginData externalUserLoginData = new ExternalUserLoginData(oAuth2UserInfo.getEmail(), oAuth2UserInfo.getProvider(), newUser);
+            externalUserLoginDataRepository.save(externalUserLoginData);
+            newUser.addExternalUsersLoginData(externalUserLoginData);
+            return newUser;
+        }
+
     }
 
 }
