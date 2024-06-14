@@ -1,0 +1,49 @@
+security:
+  jwt:
+    secret-key: 33b7d8253c370b25cf976bf5316b7553aa05c5d6fb059d2f2a468c682c5d3100
+    expiration-time: 30
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ""
+            client-secret: ""
+          github:
+            client-id: ""
+            client-secret: ""
+            scope:
+              - "read:user"
+              - "user:email"
+  datasource:
+    url: jdbc:mysql://localhost:3306/trainopia_pms
+    username: trainopia
+    password: trainopia
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+  devtools:
+    restart:
+      enabled: false
+  output:
+    ansi:
+      enabled: always
+  flyway:
+    enabled: false
+
+logging:
+  level:
+    org:
+      hibernate:
+        orm:
+          jdbc:
+            bind: trace
+        SQL: trace
+      springframework:
+        security: trace
+
+server:
+  port: 3000
