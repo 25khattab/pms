@@ -1,10 +1,7 @@
 package org.trainopia.pms.features.auth.oAuth2.user;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.trainopia.pms.features.auth.oAuth2.OAuth2Provider;
+import org.trainopia.pms.features.auth.AuthProvider;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -42,16 +39,6 @@ public class GoogleOAuth2User extends OAuth2UserInfo {
     }
 
     @Override
-    public OAuth2Provider getProvider() {
-        return OAuth2Provider.GOOGLE;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
-
-    @Override
     public String getPassword() {
         return "";
     }
@@ -61,4 +48,8 @@ public class GoogleOAuth2User extends OAuth2UserInfo {
         return getEmail();
     }
 
+    @Override
+    public AuthProvider getAuthProvider() {
+        return AuthProvider.GOOGLE;
+    }
 }

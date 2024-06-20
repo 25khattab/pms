@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -12,10 +13,12 @@ import org.trainopia.pms.config.JwtService;
 import org.trainopia.pms.features.auth.dto.AuthenticationResponse;
 import org.trainopia.pms.features.auth.oAuth2.user.OAuth2UserFactory;
 import org.trainopia.pms.features.auth.oAuth2.user.OAuth2UserInfo;
+import org.trainopia.pms.features.user.User;
 import org.trainopia.pms.features.user.UserService;
 
 import javax.security.sasl.AuthenticationException;
 import java.io.IOException;
+import java.util.Collections;
 
 @Component
 public class OAuth2SuccessAuthenticationHandler implements AuthenticationSuccessHandler {
@@ -35,11 +38,14 @@ public class OAuth2SuccessAuthenticationHandler implements AuthenticationSuccess
         if (authentication instanceof OAuth2AuthenticationToken authenticationToken) {
             OAuth2UserInfo oAuth2UserInfo = OAuth2UserFactory.getOAuth2UserInfo(authenticationToken.getAuthorizedClientRegistrationId(),
                                                                                 authenticationToken.getPrincipal().getAttributes());
-            userService.linkOrCreateFromProvider(oAuth2UserInfo);
+            User user = userService.linkOrCreateFromProvider(oAuth2UserInfo);
+            oAuth2UserInfo.setAuthorities(Collections.singleton(new SimpleGrantedAuthority(user.getRole().name())));
             String token = jwtService.generateToken(oAuth2UserInfo);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            String responseBody = objectMapper.writeValueAsString(AuthenticationResponse.builder().accessToken(token).build());
+            String responseBody = objectMapper.writeValueAsString(AuthenticationResponse.builder()
+                                                                                        .accessToken(token)
+                                                                                        .build());
             response.getWriter().write(responseBody);
         } else {
             throw new AuthenticationException("Authentication Failed");

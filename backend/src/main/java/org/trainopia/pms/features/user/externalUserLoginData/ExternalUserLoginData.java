@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.trainopia.pms.features.auth.oAuth2.OAuth2Provider;
+import org.trainopia.pms.features.auth.AuthProvider;
 import org.trainopia.pms.features.user.User;
 import org.trainopia.pms.utility.BaseEntity;
 
@@ -24,8 +24,8 @@ public class ExternalUserLoginData extends BaseEntity {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "provider")
-    private OAuth2Provider provider;
+    @Column(name = "OAuth2Provider")
+    private AuthProvider provider;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -33,7 +33,7 @@ public class ExternalUserLoginData extends BaseEntity {
 
     public ExternalUserLoginData() {}
 
-    public ExternalUserLoginData(String email, OAuth2Provider provider, User user) {
+    public ExternalUserLoginData(String email, AuthProvider provider, User user) {
         this.email = email;
         this.provider = provider;
         this.user = user;

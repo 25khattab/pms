@@ -8,7 +8,6 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.client.RestTemplate;
-import org.trainopia.pms.features.auth.oAuth2.OAuth2Provider;
 import org.trainopia.pms.features.auth.oAuth2.user.CustomOAuth2User;
 
 import java.util.List;
@@ -29,7 +28,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         CustomOAuth2User oAuth2User = new CustomOAuth2User(super.loadUser(userRequest));
 
-        if (userRequest.getClientRegistration().getRegistrationId().equals(OAuth2Provider.GITHUB.constant)) {
+        if (userRequest.getClientRegistration().getRegistrationId().equals(AuthProvider.GITHUB.constant)) {
             String email = getEmailFromGitHub(userRequest.getAccessToken().getTokenValue());
             if (email == null) {
                 throw new OAuth2AuthenticationException("email not found");

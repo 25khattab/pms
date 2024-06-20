@@ -3,7 +3,6 @@ package org.trainopia.pms.features.auth;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.trainopia.pms.config.JwtService;
 import org.trainopia.pms.features.auth.dto.AuthenticationResponse;
@@ -34,7 +33,7 @@ public class AuthService {
 
     public AuthenticationResponse signUp(UpsertUserDTO upsertUserDTO) {
         User createdUser = userService.create(upsertUserDTO);
-        UserDetails userDetails = new AuthUserDetails(createdUser);
+        CustomUserDetails userDetails = new AuthUserDetails(createdUser);
         String jwtToken = jwtService.generateToken(userDetails);
         return AuthenticationResponse.builder().accessToken(jwtToken).build();
     }
