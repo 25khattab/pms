@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User linkOrCreateFromProvider(@NonNull OAuth2UserInfo oAuth2UserInfo) {
-        // we check if a user exist with the provided email
+        // check if a user exist with the provided email
         User user = userRepository.findByEmail(oAuth2UserInfo.getEmail()).orElse(null);
         if (user != null) {
             // if user exists we then check if the provider is unique or already exist

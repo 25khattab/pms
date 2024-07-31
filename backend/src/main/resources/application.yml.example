@@ -1,7 +1,8 @@
 security:
   jwt:
     secret-key: 33b7d8253c370b25cf976bf5316b7553aa05c5d6fb059d2f2a468c682c5d3100
-    expiration-time: 30
+    access-token-expiration-time: 15
+    refresh-token-expiration-time: 43200
 spring:
   security:
     oauth2:

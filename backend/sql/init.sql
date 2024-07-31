@@ -76,13 +76,14 @@ CREATE TABLE `client`
 
 CREATE TABLE `user`
 (
-    `id`         INT                                                             NOT NULL AUTO_INCREMENT,
-    `first_name` varchar(100)                                                    NOT NULL,
-    `last_name`  varchar(100)                                                    NOT NULL,
-    `role`       varchar(100)                                                    NOT NUll,
-    `verified`   BOOLEAN   DEFAULT FALSE                                         NOT NULL,
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP                             NOT NULL,
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    `id`                    INT                                                             NOT NULL AUTO_INCREMENT,
+    `first_name`            varchar(100)                                                    NOT NULL,
+    `last_name`             varchar(100)                                                    NOT NULL,
+    `role`                  varchar(100)                                                    NOT NUll,
+    `verified`              BOOLEAN   DEFAULT FALSE                                         NOT NULL,
+    `refresh_token_version` INT       DEFAULT 1                                             NOT NULL,
+    `created_at`            TIMESTAMP DEFAULT CURRENT_TIMESTAMP                             NOT NULL,
+    `updated_at`            TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
 
     PRIMARY KEY (`id`)
 );

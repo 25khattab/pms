@@ -65,6 +65,4 @@ public class ProjectController {
     public void deleteProject(@Valid @PositiveOrZero @PathVariable int projectId) {
         projectService.deleteById(projectId);
     }
-
-    // TODO create multiDelete
 }

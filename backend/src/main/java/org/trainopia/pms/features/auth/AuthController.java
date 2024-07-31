@@ -1,5 +1,6 @@
 package org.trainopia.pms.features.auth;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,5 +31,14 @@ public class AuthController {
     @ResponseStatus(HttpStatus.CREATED)
     public AuthenticationResponse signUp(@RequestBody @Valid UpsertUserDTO upsertUserDTO) {
         return authService.signUp(upsertUserDTO);
+    }
+
+    private Cookie createCookie(String name, String value) {
+        Cookie cookie = new Cookie(name, value);
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(60 * 60 * 24 * 365);
+        cookie.setPath("/");
+        cookie.setSecure(true);
+        return cookie;
     }
 }

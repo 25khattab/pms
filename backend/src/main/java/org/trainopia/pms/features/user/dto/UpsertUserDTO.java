@@ -28,6 +28,5 @@ public class UpsertUserDTO {
 
     @NotNull(message = "password shouldn't be null")
     @NotEmpty(message = "password shouldn't be empty")
-    // TODO add more constraints on password
     String password;
 }

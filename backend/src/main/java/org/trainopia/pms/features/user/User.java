@@ -33,6 +33,12 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.VOLUNTEER;
 
+    @Column(name="verified")
+    private Boolean verified;
+
+    @Column(name="refresh_token_version")
+    private int refreshTokenVersion;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserLoginData userLoginData;
 
