@@ -33,4 +33,5 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
     @Modifying
     @Query("DELETE FROM Project")
     void deleteAll();
+
 }

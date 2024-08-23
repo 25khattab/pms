@@ -10,6 +10,7 @@ import org.trainopia.pms.utility.AppException;
 import org.trainopia.pms.utility.CommonError;
 
 @Service
+@Transactional(readOnly = true)
 public class ProjectExpenseServiceImpl implements ProjectExpenseService {
 
     ProjectExpenseRepository projectExpenseRepository;
@@ -28,6 +29,8 @@ public class ProjectExpenseServiceImpl implements ProjectExpenseService {
         ProjectExpense newProjectExpense =
             new ProjectExpense(projectExpense.getName(), projectExpense.getPrice());
         existingProject.addProjectExpense(newProjectExpense);
+        // if we have cascade presist on the project relationship then we won't need the next line
+        projectExpenseRepository.save(newProjectExpense);
         return newProjectExpense;
     }
 
@@ -67,6 +70,7 @@ public class ProjectExpenseServiceImpl implements ProjectExpenseService {
     @Override
     @Transactional
     public void deleteExpense(int projectId, int projectExpenseID) {
+        // TODO why does it make 2 queries to get the project entity
         ProjectExpense existingProjectExpense =
             projectExpenseRepository.findById(projectExpenseID).orElse(null);
         if (existingProjectExpense == null) {

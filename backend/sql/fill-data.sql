@@ -12,7 +12,7 @@ BEGIN
     DECLARE images_folder_url VARCHAR(100);
     DECLARE deleted BOOLEAN;
 
-    WHILE i <= 1000
+    WHILE i <= 10000
         DO
             SET description = CONCAT('Project ', i);
             SET images_folder_url = CONCAT('/images/project_', i);
@@ -34,7 +34,7 @@ BEGIN
     DECLARE location VARCHAR(100);
     DECLARE project_details_id INT;
 
-    WHILE i <= 1000
+    WHILE i <= 10000
         DO
             SET title = CONCAT('Project ', i);
             SET min_age = FLOOR(RAND() * 80) + 10; -- Random age between 10 and 90
@@ -58,7 +58,7 @@ BEGIN
     DECLARE project_id INT;
     DECLARE deleted BOOLEAN;
 
-    WHILE i <= 1000
+    WHILE i <= 10000
         DO
             SET name = CONCAT('Expense ', i);
             SET price = ROUND(RAND() * 90 + 10, 2); -- Random price between 10 and 100

@@ -33,10 +33,10 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.VOLUNTEER;
 
-    @Column(name="verified")
-    private Boolean verified;
+    @Column(name = "verified")
+    private Boolean verified = false;
 
-    @Column(name="refresh_token_version")
+    @Column(name = "refresh_token_version")
     private int refreshTokenVersion;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -47,7 +47,6 @@ public class User extends BaseEntity {
                cascade = CascadeType.ALL,
                fetch = FetchType.LAZY)
     private List<ExternalUserLoginData> externalUsersLoginData = new ArrayList<>();
-    ;
 
     public User() {}
 

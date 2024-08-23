@@ -47,7 +47,8 @@ public class Project extends BaseEntity {
         mappedBy = "project",
         fetch = FetchType.LAZY,
         orphanRemoval = true, // to remove the entity entirely when setting project null
-        cascade = { CascadeType.ALL })
+        cascade = { CascadeType.ALL }
+    )
     @Setter(AccessLevel.NONE)
     private List<ProjectExpense> projectExpenses = new ArrayList<>();
 
