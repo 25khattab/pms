@@ -1,0 +1,1102 @@
+{
+	"info": {
+		"_postman_id": "e8ba4fbf-19fe-4a7f-9e0d-3ae0a83a66b6",
+		"name": "backend",
+		"description": "pms API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "26813064-e8ba4fbf-19fe-4a7f-9e0d-3ae0a83a66b6"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "v1",
+					"item": [
+						{
+							"name": "auth",
+							"item": [
+								{
+									"name": "login",
+									"item": [
+										{
+											"name": "POST api/v1/auth/login",
+											"id": "bbbb16d0-8954-4aa6-b93f-a5231d78889e",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/auth/login",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"auth",
+														"login"
+													]
+												}
+											},
+											"response": [
+												{
+													"id": "a5752364-c6ca-49f7-bcfd-017334af12a6",
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"email\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/v1/auth/login",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"v1",
+																"auth",
+																"login"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"access_token\": \"<string>\",\n  \"refresh_token\": \"<string>\"\n}"
+												}
+											]
+										}
+									],
+									"id": "3e3c672f-7fa6-4e7e-8e9a-1bde2e366f28"
+								},
+								{
+									"name": "signup",
+									"item": [
+										{
+											"name": "POST api/v1/auth/signup",
+											"id": "c6682315-5016-413e-83b1-e417b87ffde5",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/auth/signup",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"auth",
+														"signup"
+													]
+												}
+											},
+											"response": [
+												{
+													"id": "570512c7-efb4-45b8-8076-464f15883328",
+													"name": "Created",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/v1/auth/signup",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"v1",
+																"auth",
+																"signup"
+															]
+														}
+													},
+													"status": "Created",
+													"code": 201,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"access_token\": \"<string>\",\n  \"refresh_token\": \"<string>\"\n}"
+												}
+											]
+										}
+									],
+									"id": "bcba6d74-fc97-49be-9698-69467b6244dd"
+								}
+							],
+							"id": "1a5cf6f2-497e-42c0-b214-4cb31e5f4a83"
+						},
+						{
+							"name": "users",
+							"item": [
+								{
+									"name": "GET api/v1/users",
+									"id": "67646ae1-a46a-4990-bce8-a69bcffbb568",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/users",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"users"
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "c99fe75e-ccd4-4fcf-afb9-7db5b40351c4",
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/users",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"users"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							],
+							"id": "9fbe9171-bd90-4fb9-8686-92babec7d484"
+						},
+						{
+							"name": "projects",
+							"item": [
+								{
+									"name": "{projectId}",
+									"item": [
+										{
+											"name": "expenses",
+											"item": [
+												{
+													"name": "{expenseId}",
+													"item": [
+														{
+															"name": "PUT api/v1/projects/{projectId}/expenses/{expenseId}",
+															"id": "fa64f4db-adef-407c-92a2-f13692d36a79",
+															"protocolProfileBehavior": {
+																"disableBodyPruning": true
+															},
+															"request": {
+																"method": "PUT",
+																"header": [
+																	{
+																		"key": "Content-Type",
+																		"value": "application/json"
+																	},
+																	{
+																		"key": "Accept",
+																		"value": "*/*"
+																	}
+																],
+																"body": {
+																	"mode": "raw",
+																	"raw": "{\n  \"name\": \"<string>\",\n  \"price\": \"<integer>\"\n}",
+																	"options": {
+																		"raw": {
+																			"headerFamily": "json",
+																			"language": "json"
+																		}
+																	}
+																},
+																"url": {
+																	"raw": "{{baseUrl}}/api/v1/projects/:projectId/expenses/:expenseId",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"api",
+																		"v1",
+																		"projects",
+																		":projectId",
+																		"expenses",
+																		":expenseId"
+																	],
+																	"variable": [
+																		{
+																			"key": "projectId",
+																			"value": "<integer>",
+																			"description": "(Required) "
+																		},
+																		{
+																			"key": "expenseId",
+																			"value": "<integer>",
+																			"description": "(Required) "
+																		}
+																	]
+																}
+															},
+															"response": [
+																{
+																	"id": "c0725459-e9aa-4fb2-8a24-20d3b17539b4",
+																	"name": "OK",
+																	"originalRequest": {
+																		"method": "PUT",
+																		"header": [
+																			{
+																				"key": "Content-Type",
+																				"value": "application/json"
+																			},
+																			{
+																				"key": "Accept",
+																				"value": "*/*"
+																			}
+																		],
+																		"body": {
+																			"mode": "raw",
+																			"raw": "{\n  \"name\": \"<string>\",\n  \"price\": \"<integer>\"\n}",
+																			"options": {
+																				"raw": {
+																					"headerFamily": "json",
+																					"language": "json"
+																				}
+																			}
+																		},
+																		"url": {
+																			"raw": "{{baseUrl}}/api/v1/projects/:projectId/expenses/:expenseId",
+																			"host": [
+																				"{{baseUrl}}"
+																			],
+																			"path": [
+																				"api",
+																				"v1",
+																				"projects",
+																				":projectId",
+																				"expenses",
+																				":expenseId"
+																			],
+																			"variable": [
+																				{
+																					"key": "projectId"
+																				},
+																				{
+																					"key": "expenseId"
+																				}
+																			]
+																		}
+																	},
+																	"status": "OK",
+																	"code": 200,
+																	"_postman_previewlanguage": "text",
+																	"header": [
+																		{
+																			"key": "Content-Type",
+																			"value": "*/*"
+																		}
+																	],
+																	"cookie": [],
+																	"body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"price\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+																}
+															]
+														},
+														{
+															"name": "DELETE api/v1/projects/{projectId}/expenses/{expenseId}",
+															"id": "384d9e32-5feb-4063-a595-29f39c7638fe",
+															"protocolProfileBehavior": {
+																"disableBodyPruning": true
+															},
+															"request": {
+																"method": "DELETE",
+																"header": [],
+																"url": {
+																	"raw": "{{baseUrl}}/api/v1/projects/:projectId/expenses/:expenseId",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"api",
+																		"v1",
+																		"projects",
+																		":projectId",
+																		"expenses",
+																		":expenseId"
+																	],
+																	"variable": [
+																		{
+																			"key": "projectId",
+																			"value": "<integer>",
+																			"description": "(Required) "
+																		},
+																		{
+																			"key": "expenseId",
+																			"value": "<integer>",
+																			"description": "(Required) "
+																		}
+																	]
+																}
+															},
+															"response": [
+																{
+																	"id": "b325fa45-29b0-4ea7-88db-ed0dcbca8df2",
+																	"name": "No Content",
+																	"originalRequest": {
+																		"method": "DELETE",
+																		"header": [],
+																		"url": {
+																			"raw": "{{baseUrl}}/api/v1/projects/:projectId/expenses/:expenseId",
+																			"host": [
+																				"{{baseUrl}}"
+																			],
+																			"path": [
+																				"api",
+																				"v1",
+																				"projects",
+																				":projectId",
+																				"expenses",
+																				":expenseId"
+																			],
+																			"variable": [
+																				{
+																					"key": "projectId"
+																				},
+																				{
+																					"key": "expenseId"
+																				}
+																			]
+																		}
+																	},
+																	"status": "No Content",
+																	"code": 204,
+																	"_postman_previewlanguage": "text",
+																	"header": [],
+																	"cookie": []
+																}
+															]
+														}
+													],
+													"id": "3a980feb-5268-451b-aa4b-a8cc1e819312"
+												},
+												{
+													"name": "POST api/v1/projects/{projectId}/expenses",
+													"id": "75a0c94c-0d06-4a51-ad9c-4742f107aed4",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"name\": \"<string>\",\n  \"price\": \"<integer>\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/v1/projects/:projectId/expenses",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"v1",
+																"projects",
+																":projectId",
+																"expenses"
+															],
+															"variable": [
+																{
+																	"key": "projectId",
+																	"value": "<integer>",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"response": [
+														{
+															"id": "b4b82524-0d84-4f54-a454-9ddee6346232",
+															"name": "Created",
+															"originalRequest": {
+																"method": "POST",
+																"header": [
+																	{
+																		"key": "Content-Type",
+																		"value": "application/json"
+																	},
+																	{
+																		"key": "Accept",
+																		"value": "*/*"
+																	}
+																],
+																"body": {
+																	"mode": "raw",
+																	"raw": "{\n  \"name\": \"<string>\",\n  \"price\": \"<integer>\"\n}",
+																	"options": {
+																		"raw": {
+																			"headerFamily": "json",
+																			"language": "json"
+																		}
+																	}
+																},
+																"url": {
+																	"raw": "{{baseUrl}}/api/v1/projects/:projectId/expenses",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"api",
+																		"v1",
+																		"projects",
+																		":projectId",
+																		"expenses"
+																	],
+																	"variable": [
+																		{
+																			"key": "projectId"
+																		}
+																	]
+																}
+															},
+															"status": "Created",
+															"code": 201,
+															"_postman_previewlanguage": "text",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "*/*"
+																}
+															],
+															"cookie": [],
+															"body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"price\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+														}
+													]
+												}
+											],
+											"id": "255ec446-a579-48cc-8f0b-ee4351e4dcd4"
+										},
+										{
+											"name": "PUT api/v1/projects/{projectId}",
+											"id": "7aa72d74-fd92-4fce-88a4-cff7ac5a2a7e",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"title\": \"<string>\",\n  \"minAge\": \"<integer>\",\n  \"maxAge\": \"<integer>\",\n  \"price\": \"<double>\",\n  \"location\": \"<string>\",\n  \"projectDetails\": {\n    \"description\": \"<string>\",\n    \"imagesFolderURL\": \"<string>\"\n  }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/projects/:projectId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"projects",
+														":projectId"
+													],
+													"variable": [
+														{
+															"key": "projectId",
+															"value": "<integer>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"id": "8fc3503d-d0b8-49ab-8fea-37ea923a3eca",
+													"name": "OK",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"title\": \"<string>\",\n  \"minAge\": \"<integer>\",\n  \"maxAge\": \"<integer>\",\n  \"price\": \"<double>\",\n  \"location\": \"<string>\",\n  \"projectDetails\": {\n    \"description\": \"<string>\",\n    \"imagesFolderURL\": \"<string>\"\n  }\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/v1/projects/:projectId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"v1",
+																"projects",
+																":projectId"
+															],
+															"variable": [
+																{
+																	"key": "projectId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"title\": \"<string>\",\n  \"minAge\": \"<integer>\",\n  \"maxAge\": \"<integer>\",\n  \"price\": \"<double>\",\n  \"location\": \"<string>\",\n  \"projectDetails\": {\n    \"description\": \"<string>\",\n    \"imagesFolderURL\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  \"projectExpenses\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"id\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+												}
+											]
+										},
+										{
+											"name": "DELETE api/v1/projects/{projectId}",
+											"id": "278741fa-b0b6-4767-bb7a-bd8086442c5c",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/projects/:projectId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"projects",
+														":projectId"
+													],
+													"variable": [
+														{
+															"key": "projectId",
+															"value": "<integer>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"id": "f907b567-8ce0-4947-a9c8-12f0be23216a",
+													"name": "No Content",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/api/v1/projects/:projectId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"v1",
+																"projects",
+																":projectId"
+															],
+															"variable": [
+																{
+																	"key": "projectId"
+																}
+															]
+														}
+													},
+													"status": "No Content",
+													"code": 204,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": []
+												}
+											]
+										},
+										{
+											"name": "GET api/v1/projects/{projectId}",
+											"id": "ff9ff6d8-570b-460d-971a-0ab8c13222d2",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/projects/:projectId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"projects",
+														":projectId"
+													],
+													"variable": [
+														{
+															"key": "projectId",
+															"value": "<integer>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"id": "c5ae1e68-8164-49c9-97ce-f2340876538f",
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/v1/projects/:projectId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"v1",
+																"projects",
+																":projectId"
+															],
+															"variable": [
+																{
+																	"key": "projectId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"title\": \"<string>\",\n  \"minAge\": \"<integer>\",\n  \"maxAge\": \"<integer>\",\n  \"price\": \"<double>\",\n  \"location\": \"<string>\",\n  \"projectDetails\": {\n    \"description\": \"<string>\",\n    \"imagesFolderURL\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  \"projectExpenses\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"id\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+												}
+											]
+										}
+									],
+									"id": "e589a372-49ee-4eba-af3b-b534a8e4d85c"
+								},
+								{
+									"name": "POST api/v1/projects",
+									"id": "efd6f7bc-da1d-4859-a6f3-361cd1249fa6",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"<string>\",\n  \"minAge\": \"<integer>\",\n  \"maxAge\": \"<integer>\",\n  \"price\": \"<double>\",\n  \"location\": \"<string>\",\n  \"projectDetails\": {\n    \"description\": \"<string>\",\n    \"imagesFolderURL\": \"<string>\"\n  }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/projects",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"projects"
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "5988f6d6-5e8e-4239-9ea5-920186d8a4cb",
+											"name": "Created",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"title\": \"<string>\",\n  \"minAge\": \"<integer>\",\n  \"maxAge\": \"<integer>\",\n  \"price\": \"<double>\",\n  \"location\": \"<string>\",\n  \"projectDetails\": {\n    \"description\": \"<string>\",\n    \"imagesFolderURL\": \"<string>\"\n  }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/projects",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"projects"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"title\": \"<string>\",\n  \"minAge\": \"<integer>\",\n  \"maxAge\": \"<integer>\",\n  \"price\": \"<double>\",\n  \"location\": \"<string>\",\n  \"projectDetails\": {\n    \"description\": \"<string>\",\n    \"imagesFolderURL\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  \"projectExpenses\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"id\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "GET api/v1/projects",
+									"id": "3045df37-a7aa-414c-8e53-2b74399e6e80",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/projects?pageNo=0&pageSize=10&sortBy=id&sortDirection=ASC",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"projects"
+											],
+											"query": [
+												{
+													"key": "pageNo",
+													"value": "0"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												},
+												{
+													"key": "sortBy",
+													"value": "id"
+												},
+												{
+													"key": "sortDirection",
+													"value": "ASC"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "d9eb7933-a468-499a-9efa-3423aa8ca8e3",
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/projects?pageNo=0&pageSize=10&sortBy=id&sortDirection=ASC",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"projects"
+													],
+													"query": [
+														{
+															"key": "pageNo",
+															"value": "0"
+														},
+														{
+															"key": "pageSize",
+															"value": "10"
+														},
+														{
+															"key": "sortBy",
+															"value": "id"
+														},
+														{
+															"key": "sortDirection",
+															"value": "ASC"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"title\": \"<string>\",\n    \"minAge\": \"<integer>\",\n    \"maxAge\": \"<integer>\",\n    \"price\": \"<double>\",\n    \"location\": \"<string>\",\n    \"projectDetails\": {\n      \"description\": \"<string>\",\n      \"imagesFolderURL\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    \"id\": \"<integer>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  {\n    \"title\": \"<string>\",\n    \"minAge\": \"<integer>\",\n    \"maxAge\": \"<integer>\",\n    \"price\": \"<double>\",\n    \"location\": \"<string>\",\n    \"projectDetails\": {\n      \"description\": \"<string>\",\n      \"imagesFolderURL\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    \"id\": \"<integer>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n]"
+										}
+									]
+								}
+							],
+							"id": "c3105977-9c6a-4f66-899a-74dd2e19f06c"
+						}
+					],
+					"id": "ced154f5-2160-4cdb-99ce-1ac696ed847c"
+				}
+			],
+			"id": "0966d122-04e6-458d-aa7f-221d90df01bb"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNWtoYXR0YWJAZ21haWwuY29tIiwiaWF0IjoxNzI0NTczMzE5LCJleHAiOjE3MjQ1NzQyMTksInByb3ZpZGVyIjoiQ1JFREVOVElBTFMifQ.1mVlaJw3ro922F2brwH6buXhkZZ-qd5RXmmsotPXouE",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "7b6f6c28-dc04-4347-9312-2e94545bb2ca",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9d85d77a-921d-4a4e-9738-01ce78399e43",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "3653c9c7-8f3b-4090-aefa-25248c85a4c6",
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		}
+	]
+}
