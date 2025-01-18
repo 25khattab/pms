@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             // if user exists we then check if the provider is unique or already exist
             Optional<ExternalUserLoginData> existingUserWithSameProvider = user.getExternalUsersLoginData().stream().filter(
-                externalData -> externalData.getProvider() == oAuth2UserInfo.getAuthProvider()).findFirst();
+                externalData -> externalData.getProvider().equals(oAuth2UserInfo.getAuthProvider())).findFirst();
             if (existingUserWithSameProvider.isEmpty()) {
                 ExternalUserLoginData externalUserLoginData = new ExternalUserLoginData(oAuth2UserInfo.getEmail(), oAuth2UserInfo.getAuthProvider(),
                                                                                         user);

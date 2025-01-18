@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.trainopia</groupId>
     <artifactId>pms</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>pms</name>
     <description>Trainopia PMS</description>
     <properties>

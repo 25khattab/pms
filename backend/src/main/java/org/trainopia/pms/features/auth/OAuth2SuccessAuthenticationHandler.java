@@ -36,8 +36,9 @@ public class OAuth2SuccessAuthenticationHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
         throws IOException, ServletException {
         if (authentication instanceof OAuth2AuthenticationToken authenticationToken) {
-            OAuth2UserInfo oAuth2UserInfo = OAuth2UserFactory.getOAuth2UserInfo(authenticationToken.getAuthorizedClientRegistrationId(),
-                                                                                authenticationToken.getPrincipal().getAttributes());
+            var registrationId = authenticationToken.getAuthorizedClientRegistrationId();
+            var attributes = authenticationToken.getPrincipal().getAttributes();
+            OAuth2UserInfo oAuth2UserInfo = OAuth2UserFactory.getOAuth2UserInfo(registrationId, attributes);
             User user = userService.linkOrCreateFromProvider(oAuth2UserInfo);
             oAuth2UserInfo.setAuthorities(Collections.singleton(new SimpleGrantedAuthority(user.getRole().name())));
             String token = jwtService.generateToken(oAuth2UserInfo);

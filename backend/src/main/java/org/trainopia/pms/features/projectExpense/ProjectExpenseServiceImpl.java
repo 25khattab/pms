@@ -68,7 +68,8 @@ public class ProjectExpenseServiceImpl implements ProjectExpenseService {
     }
 
     @Override
-    @Transactional
+    //FIXME
+//    @Transactional
     public void deleteExpense(int projectId, int projectExpenseID) {
         // TODO why does it make 2 queries to get the project entity
         ProjectExpense existingProjectExpense =
