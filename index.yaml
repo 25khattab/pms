@@ -1,20 +1,20 @@
 openapi: "3.0.0"
 info:
-  title: "backend API"
-  description: "backend API"
+  title: "pms API"
+  description: "pms API"
   version: "1.0.0"
 servers:
-  - url: "https://backend"
+  - url: "http://localhost:3000/api/v1"
 paths:
-  /users:
+  /api/v1/auth/login:
     post:
-      summary: "POST users"
-      operationId: "createUser"
+      summary: "POST api/v1/auth/login"
+      operationId: "login"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateUserDTO"
+              $ref: "#/components/schemas/UserLoginDTO"
         required: true
       responses:
         "200":
@@ -22,9 +22,27 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/AuthenticationResponse"
+  /api/v1/auth/signup:
+    post:
+      summary: "POST api/v1/auth/signup"
+      operationId: "signUp"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpsertUserDTO"
+        required: true
+      responses:
+        "201":
+          description: "Created"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthenticationResponse"
+  /api/v1/users:
     get:
-      summary: "GET users"
+      summary: "GET api/v1/users"
       operationId: "findAllUsers"
       responses:
         "200":
@@ -33,9 +51,9 @@ paths:
             '*/*':
               schema:
                 type: "object"
-  /projects/{projectId}:
+  /api/v1/projects/{projectId}:
     put:
-      summary: "PUT projects/{projectId}"
+      summary: "PUT api/v1/projects/{projectId}"
       operationId: "updateProject"
       parameters:
         - name: "projectId"
@@ -48,7 +66,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateProjectDTO"
+              $ref: "#/components/schemas/UpsertProjectDTO"
         required: true
       responses:
         "200":
@@ -58,7 +76,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Project"
     delete:
-      summary: "DELETE projects/{projectId}"
+      summary: "DELETE api/v1/projects/{projectId}"
       operationId: "deleteProject"
       parameters:
         - name: "projectId"
@@ -71,7 +89,7 @@ paths:
         "204":
           description: "No Content"
     get:
-      summary: "GET projects/{projectId}"
+      summary: "GET api/v1/projects/{projectId}"
       operationId: "getProjectById"
       parameters:
         - name: "projectId"
@@ -87,15 +105,15 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/Project"
-  /projects:
+  /api/v1/projects:
     post:
-      summary: "POST projects"
+      summary: "POST api/v1/projects"
       operationId: "createProject"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateProjectDTO"
+              $ref: "#/components/schemas/UpsertProjectDTO"
         required: true
       responses:
         "201":
@@ -105,42 +123,48 @@ paths:
               schema:
                 $ref: "#/components/schemas/Project"
     get:
-      summary: "GET projects"
+      summary: "GET api/v1/projects"
       operationId: "getAllProjects"
       parameters:
-        - name: "page"
+        - name: "pageNo"
           in: "query"
           required: false
           schema:
             type: "integer"
             format: "int32"
             default: "0"
-        - name: "size"
+        - name: "pageSize"
           in: "query"
           required: false
           schema:
             type: "integer"
             format: "int32"
-            default: "3"
-        - name: "sort"
+            default: "10"
+        - name: "sortBy"
           in: "query"
           required: false
           schema:
-            type: "array"
-            items:
-              type: "string"
-            default: "id,desc"
+            type: "string"
+            default: "id"
+        - name: "sortDirection"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+            default: "ASC"
       responses:
         "200":
           description: "OK"
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/ProjectDTO"
-  /projects/{projectId}/expenses/{expenseId}:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/ProjectDTO"
+  /api/v1/projects/{projectId}/expenses/{expenseId}:
     put:
-      summary: "PUT projects/{projectId}/expenses/{expenseId}"
-      operationId: "createProjectExpense"
+      summary: "PUT api/v1/projects/{projectId}/expenses/{expenseId}"
+      operationId: "updateProjectExpense"
       parameters:
         - name: "projectId"
           in: "path"
@@ -166,9 +190,9 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/Project"
+                $ref: "#/components/schemas/ProjectExpense"
     delete:
-      summary: "DELETE projects/{projectId}/expenses/{expenseId}"
+      summary: "DELETE api/v1/projects/{projectId}/expenses/{expenseId}"
       operationId: "deleteProjectExpense"
       parameters:
         - name: "projectId"
@@ -186,9 +210,9 @@ paths:
       responses:
         "204":
           description: "No Content"
-  /projects/{projectId}/expenses:
+  /api/v1/projects/{projectId}/expenses:
     post:
-      summary: "POST projects/{projectId}/expenses"
+      summary: "POST api/v1/projects/{projectId}/expenses"
       operationId: "createProjectExpense"
       parameters:
         - name: "projectId"
@@ -209,10 +233,24 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/Project"
+                $ref: "#/components/schemas/ProjectExpense"
 components:
   schemas:
-    CreateUserDTO:
+    UserLoginDTO:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+        password:
+          type: "string"
+    AuthenticationResponse:
+      type: "object"
+      properties:
+        access_token:
+          type: "string"
+        refresh_token:
+          type: "string"
+    UpsertUserDTO:
       type: "object"
       properties:
         firstName:
@@ -223,48 +261,6 @@ components:
           type: "string"
         password:
           type: "string"
-        userName:
-          type: "string"
-    UserLoginData:
-      type: "object"
-      properties:
-        userName:
-          type: "string"
-        email:
-          type: "string"
-        id:
-          type: "integer"
-          format: "int32"
-        createdAt:
-          type: "string"
-          format: "date-time"
-        updatedAt:
-          type: "string"
-          format: "date-time"
-    User:
-      type: "object"
-      properties:
-        firstName:
-          type: "string"
-        lastName:
-          type: "string"
-        role:
-          type: "string"
-          enum:
-            - "MANAGER"
-            - "PROJECT_MANAGER"
-            - "VOLUNTEER"
-        userLoginData:
-          $ref: "#/components/schemas/UserLoginData"
-        id:
-          type: "integer"
-          format: "int32"
-        createdAt:
-          type: "string"
-          format: "date-time"
-        updatedAt:
-          type: "string"
-          format: "date-time"
     ProjectDetailsDTO:
       type: "object"
       properties:
@@ -272,7 +268,7 @@ components:
           type: "string"
         imagesFolderURL:
           type: "string"
-    CreateProjectDTO:
+    UpsertProjectDTO:
       type: "object"
       properties:
         title:
